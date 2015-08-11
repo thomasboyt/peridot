@@ -2,6 +2,8 @@ import React from 'react';
 import moment from 'moment';
 import Video from './video';
 
+import parseTweetText from './util/parseTweetText';
+
 const Tweet = React.createClass({
   stripMediaEntities(original) {
     let text = [];
@@ -48,18 +50,9 @@ const Tweet = React.createClass({
   },
 
   renderText() {
-    let text = this.props.tweet.text;
-
-    // 1. Strip media entities, as these are displayed elsewhere
-    text = this.stripMediaEntities(text);
-    // 2. Linkify URLs and replace with expanded versions
-    // TODO
-    // 3. Linkify @handles
-    text = this.replaceMentions(text);
-
     return (
       <span>
-        {text}
+        {parseTweetText(this.props.tweet.text, this.props.tweet.entities)}
       </span>
     );
   },
