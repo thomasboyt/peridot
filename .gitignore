@@ -1,2 +1,4 @@
 node_modules/
-site/
+_site/
+_cache/
+_private.yml
