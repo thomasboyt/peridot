@@ -1,30 +1,13 @@
-import {sync as mkdirpSync} from 'mkdirp';
-mkdirpSync('_cache');
+import app from 'commander';
+const pkg = require('../package.json');
 
-import build from './build';
+import build from './builder';
 
-build().then(() => {
-  console.log('all done');
+app
+  .version(pkg.version);
 
-}).catch((err) => {
-  console.error('Unhandled error building:');
+app.command('build')
+  .description('Build files to _site/')
+  .action(build);
 
-  // warning: lame duck-typing below~
-
-  if (err.stack) {
-    // JS errors
-    console.log(err.stack);
-
-  } else if (err.url) {
-    // Failed window.fetch response
-    console.log(`${err.url} - ${err.status} ${err.statusText}`);
-
-    err.text().then((body) => {
-      console.log(body);
-    });
-
-  } else {
-    // Other error
-    console.log(err);
-  }
-});
+app.parse(process.argv);

@@ -2,7 +2,7 @@ import {readFileSync} from 'fs';
 import yaml from 'js-yaml';
 
 import React from 'react';
-import Post from './components/Post';
+import Post from '../../components/Post';
 import loadEntries from './loadEntries';
 
 export default async function build() {

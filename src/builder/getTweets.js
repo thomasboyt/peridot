@@ -1,20 +1,16 @@
 import {readFileSync, writeFileSync} from 'fs';
-import fetchTweets from './twitter/fetchTweets';
+import fetchTweets from '../twitter/fetchTweets';
 
 function getCachePath(id) {
   return `./_cache/${id}.json`;
 }
 
 function getCache(id) {
-  let cached;
-
   try {
-    cached = readFileSync(getCachePath(id), {encoding: 'utf8'});
+    return readFileSync(getCachePath(id), {encoding: 'utf8'});
   } catch(err) {
     return undefined;
   }
-
-  return JSON.parse(cached);
 }
 
 function cacheTweet(tweet) {
