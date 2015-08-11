@@ -25,6 +25,6 @@ build().then(() => {
 
   } else {
     // Other error
-    console.log(err)
+    console.log(err);
   }
 });

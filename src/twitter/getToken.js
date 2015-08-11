@@ -27,7 +27,7 @@ export default async function getToken() {
     }
 
     const data = await resp.json();
-    
+
     return data.access_token;
 
   } catch(err) {

@@ -23,12 +23,6 @@ function cacheTweet(tweet) {
 }
 
 export default async function getTweets(ids) {
-  // 0. for each url:
-  // 1. Parse URL
-  // 2. Look in _cache/:id to see if tweet was already downloaded
-  // 3. If so, set value in returned tweets[id] to cache
-  // 4. Otherwise, add to list of tweets to fetch
-
   const tweets = {};
   const queue = [];
 
