@@ -1,0 +1,17 @@
+{
+  "name": "blork",
+  "version": "1.0.0",
+  "description": "",
+  "main": "blork.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "babel": "^5.8.21",
+    "js-yaml": "^3.3.1",
+    "moment": "^2.10.6",
+    "react": "^0.13.3"
+  }
+}
