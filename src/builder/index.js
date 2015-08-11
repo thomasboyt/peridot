@@ -1,6 +1,3 @@
-import {sync as mkdirpSync} from 'mkdirp';
-mkdirpSync('_cache');
-
 import build from './build';
 
 export default function() {

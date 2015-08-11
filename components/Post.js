@@ -3,7 +3,6 @@ import moment from 'moment';
 
 import Tweet from './Tweet';
 
-
 const DATE_STRING = 'ddd. MMMM Do, YYYY';
 
 const Post = React.createClass({
@@ -21,7 +20,7 @@ const Post = React.createClass({
     return (
       <div>
         <h1>{title}</h1>
-        <h3>{moment(date, 'MM/DD/YY').format(DATE_STRING)}</h3>
+        <h3>{moment(date, 'YYYY-MM-DD').format(DATE_STRING)}</h3>
 
         {this.renderTweets(tweets)}
       </div>

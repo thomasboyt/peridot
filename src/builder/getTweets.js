@@ -7,7 +7,7 @@ function getCachePath(id) {
 
 function getCache(id) {
   try {
-    return readFileSync(getCachePath(id), {encoding: 'utf8'});
+    return JSON.parse(readFileSync(getCachePath(id), {encoding: 'utf8'}));
   } catch(err) {
     return undefined;
   }
