@@ -18,7 +18,7 @@ app.command('build')
 
 app.command('serve')
   .description('Build and serve files')
-  .action(async function() {
+  .action(() => {
     build().then(serve);
   });
 
