@@ -7,6 +7,10 @@ export default async function loadEntries(entryData) {
   const re = /https:\/\/twitter.com\/.+\/status\/([0-9]+)/;
 
   entryData.forEach((entry) => {
+    if (!entry.tweets) {
+      entry.tweets = [];
+    }
+
     entry.tweets = entry.tweets.map((url) => {
       return url.match(re)[1];
     });
