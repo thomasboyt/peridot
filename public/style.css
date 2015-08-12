@@ -1,0 +1,62 @@
+/*
+ * Common
+ */
+
+body {
+  text-align: center;
+  background: black;
+  color: white;
+}
+
+.entry-box {
+  color: black;
+  background: rgb(249, 249, 249);
+  padding: 5px;
+}
+
+.entry-box p {
+  font-weight: strong;
+}
+
+.entry-box .title {
+  text-transform: uppercase;
+  margin-bottom: 0px;
+}
+
+.title a, .title a:visited, .title a:hover {
+  color: black;
+}
+
+
+/*
+ * Home
+ */
+
+.home {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.home ul {
+  padding-left: 0;
+  list-style-type: none;
+  color: black;
+} 
+
+.home ul li {
+  margin-bottom: 20px;
+}
+
+
+/*
+ * Entry page
+ */
+
+.entry a, .entry a:visited, .entry a:hover {
+  color: white;
+}
+
+.entry .description {
+  max-width: 600px;
+  margin: 0 auto;
+}

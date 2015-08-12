@@ -4,6 +4,7 @@ export default function serve() {
   const app = express();
 
   app.use(express.static('_site/'));
+  app.use(express.static('public/'));
 
   const server = app.listen(3000, function () {
     const host = server.address().address;

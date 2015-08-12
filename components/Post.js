@@ -14,13 +14,39 @@ const Post = React.createClass({
     });
   },
 
-  render() {
-    const {title, date, tweets} = this.props;
+  renderDescription(description) {
+    if (!description) {
+      return null;
+    }
+
+    const paragraphs = description.split('\n\n');
+
+    const paras = paragraphs.map((paragraph) => (
+      <p>{paragraph}</p>
+    ));
 
     return (
-      <div>
-        <h1>{title}</h1>
-        <h3>{moment(date, 'YYYY-MM-DD').format(DATE_STRING)}</h3>
+      <div className="description">
+        {paras}
+      </div>
+    );
+  },
+
+  render() {
+    const {title, date, tweets, location} = this.props;
+
+    return (
+      <div className="entry">
+        <div className="entry-box">
+          <h1 className="title">{title}</h1>
+          <p>
+            {moment(date, 'YYYY-MM-DD').format(DATE_STRING)}
+            {' @ '}
+            <strong>{location}</strong>
+          </p>
+        </div>
+
+        {this.renderDescription(this.props.description)}
 
         {this.renderTweets(tweets)}
       </div>

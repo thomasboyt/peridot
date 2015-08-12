@@ -11,6 +11,8 @@ const Page = React.createClass({
       <html>
         <head>
           <title>{this.props.title}</title>
+          <link href="/normalize.css" rel="stylesheet" />
+          <link href="/style.css" rel="stylesheet" />
         </head>
         <body>
           {this.props.children}

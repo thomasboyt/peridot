@@ -4,12 +4,29 @@ import moment from 'moment';
 const DATE_STRING = 'ddd. MMMM Do, YYYY';
 
 const List = React.createClass({
+
+  maybeRenderLink(post) {
+    // Only render a link to a post if it has content (tweets, description, etc)
+
+    if (post.tweets.length > 0 || post.description) {
+      return (
+        <a href={post.link}>{post.title}</a>
+      );
+    } else {
+      return post.title;
+    }
+  },
+
   renderPosts() {
     return this.props.entries.map((post) => {
       return (
-        <li key={post.link}>
-          <h2><a href={post.link}>{post.title}</a></h2>
-          <h3>{moment(post.date, 'YYYY-MM-DD').format(DATE_STRING)}</h3>
+        <li key={post.link} className="entry-box">
+          <h2 className="title">{this.maybeRenderLink(post)}</h2>
+          <p>
+            {moment(post.date, 'YYYY-MM-DD').format(DATE_STRING)}
+            {' @ '}
+            <strong>{post.location}</strong>
+          </p>
         </li>
       );
     });
@@ -17,7 +34,7 @@ const List = React.createClass({
 
   render() {
     return (
-      <div>
+      <div className="home">
         <h1>Loud Places</h1>
         <p>I go to lots of concerts. Here are all of them.</p>
 
