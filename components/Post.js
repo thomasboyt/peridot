@@ -41,7 +41,9 @@ const Post = React.createClass({
           <h1 className="title">{title}</h1>
           <p>
             {moment(date, 'YYYY-MM-DD').format(DATE_STRING)}
-            {' @ '}
+            <span className="at-sign">
+              {' @ '}
+            </span>
             <strong>{location}</strong>
           </p>
         </div>

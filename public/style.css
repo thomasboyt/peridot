@@ -23,12 +23,26 @@ h1 {
 .entry-box {
   color: black;
   background: rgb(249, 249, 249);
-  padding: 5px;
+
+  /* little less due to line-height on h2 */
+  padding-top: 18px;
+  padding-bottom: 20px;
+
   font-family: Dosis, sans-serif;
+}
+
+.entry-box .title, .entry-box p {
+  margin: 0;
 }
 
 .entry-box p {
   font-size: 18px;
+}
+
+.entry-box .at-sign {
+  position: relative;
+  top: -1px;
+  font-size: 22px;
 }
 
 .entry-box strong {
@@ -38,7 +52,7 @@ h1 {
 .entry-box .title {
   font-weight: 500;
   text-transform: uppercase;
-  margin-bottom: 0px;
+  margin-bottom: 3px;
 }
 
 .title a, .title a:visited, .title a:hover {
@@ -78,3 +92,4 @@ h1 {
   max-width: 600px;
   margin: 0 auto;
 }
+

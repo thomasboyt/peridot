@@ -24,7 +24,9 @@ const List = React.createClass({
           <h2 className="title">{this.maybeRenderLink(post)}</h2>
           <p>
             {moment(post.date, 'YYYY-MM-DD').format(DATE_STRING)}
-            {' @ '}
+            <span className="at-sign">
+              {' @ '}
+            </span>
             <strong>{post.location}</strong>
           </p>
         </li>
