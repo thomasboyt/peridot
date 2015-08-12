@@ -12,7 +12,11 @@ h1 {
   font-family: Dosis, sans-serif;
   text-transform: uppercase;
   font-weight: 600;
-  margin-bottom: 0px;
+}
+
+.blog-title a, .blog-title a:visited, blog-title a:hover {
+  text-decoration: none;
+  color: white;
 }
 
 .home > p {

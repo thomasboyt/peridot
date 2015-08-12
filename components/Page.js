@@ -15,7 +15,12 @@ const Page = React.createClass({
           <link href="/normalize.css" rel="stylesheet" />
           <link href="/style.css" rel="stylesheet" />
         </head>
+
         <body>
+          <h1 className="blog-title">
+            <a href="/">Loud Places</a>
+          </h1>
+
           {this.props.children}
         </body>
       </html>
