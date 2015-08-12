@@ -7,6 +7,7 @@ import app from 'commander';
 const pkg = require('../package.json');
 
 import build from './builder';
+import serve from './server';
 
 app
   .version(pkg.version);
@@ -14,5 +15,11 @@ app
 app.command('build')
   .description('Build files to _site/')
   .action(build);
+
+app.command('serve')
+  .description('Build and serve files')
+  .action(async function() {
+    build().then(serve);
+  });
 
 app.parse(process.argv);

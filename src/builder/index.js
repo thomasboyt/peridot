@@ -1,7 +1,7 @@
 import build from './build';
 
 export default function() {
-  build().then(() => {
+  return build().then(() => {
     console.log('all done');
 
   }).catch((err) => {
