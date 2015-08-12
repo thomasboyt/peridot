@@ -10,6 +10,9 @@ import List from '../../components/List';
 
 import loadEntries from './loadEntries';
 
+// TODO: load this from a config file
+const blogTitle = 'Loud Places';
+
 export default async function build() {
   const entriesYaml = readFileSync('_entries.yml', {encoding: 'utf8'});
 
@@ -25,7 +28,7 @@ export default async function build() {
 
   zip(entries, posts).forEach(([entry, post]) => {
     const html = React.renderToStaticMarkup(
-      <Page title={`${entry.title} | Nite Flights`}>
+      <Page title={`${entry.title} | ${blogTitle}`}>
         {post}
       </Page>
     );
@@ -39,7 +42,7 @@ export default async function build() {
 
   // Build list
   const listHtml = React.renderToStaticMarkup(
-    <Page title="Nite Flights">
+    <Page title={blogTitle}>
       <List entries={entries} />
     </Page>
   );
