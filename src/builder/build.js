@@ -27,7 +27,7 @@ export default async function build() {
   });
 
   zip(entries, posts).forEach(([entry, post]) => {
-    const html = React.renderToStaticMarkup(
+    const html = React.renderToString(
       <Page title={`${entry.title} | ${blogTitle}`}>
         {post}
       </Page>
