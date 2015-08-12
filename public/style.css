@@ -97,3 +97,7 @@ h1 {
   margin: 0 auto;
 }
 
+video {
+  width: 50%;
+  height: 50%;
+}
