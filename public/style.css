@@ -8,17 +8,35 @@ body {
   color: white;
 }
 
+h1 {
+  font-family: Dosis, sans-serif;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 0px;
+}
+
+.home > p {
+  font-family: Dosis, sans-serif;
+  margin-bottom: 40px;
+}
+
 .entry-box {
   color: black;
   background: rgb(249, 249, 249);
   padding: 5px;
+  font-family: Dosis, sans-serif;
 }
 
 .entry-box p {
-  font-weight: strong;
+  font-size: 18px;
+}
+
+.entry-box strong {
+  font-weight: 700;
 }
 
 .entry-box .title {
+  font-weight: 500;
   text-transform: uppercase;
   margin-bottom: 0px;
 }
