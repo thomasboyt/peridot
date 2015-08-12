@@ -18,8 +18,6 @@ app.command('build')
 
 app.command('serve')
   .description('Build and serve files')
-  .action(() => {
-    build().then(serve);
-  });
+  .action(serve);
 
 app.parse(process.argv);

@@ -10,6 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "babel": "^5.8.21",
+    "chokidar": "^1.0.5",
     "commander": "^2.8.1",
     "express": "^4.13.3",
     "grunt": "^0.4.5",

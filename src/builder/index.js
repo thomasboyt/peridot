@@ -1,10 +1,11 @@
 import build from './build';
 
-export default function() {
-  return build().then(() => {
-    console.log('all done');
+export default async function() {
+  console.log('Building...');
 
-  }).catch((err) => {
+  try {
+    await build();
+  } catch(err) {
     console.error('Unhandled error building:');
 
     // warning: lame duck-typing below~
@@ -25,5 +26,9 @@ export default function() {
       // Other error
       console.log(err);
     }
-  });
+
+    return;
+  }
+
+  console.log('...Done!');
 }
