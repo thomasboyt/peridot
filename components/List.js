@@ -36,7 +36,7 @@ const List = React.createClass({
     return (
       <div className="home">
         <h1>Loud Places</h1>
-        <p>I go to lots of concerts. Here are all of them.</p>
+        <p>I go to lots of shows. Here are all of them.</p>
 
         <ul>
           {this.renderPosts()}
