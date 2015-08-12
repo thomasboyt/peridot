@@ -21,3 +21,8 @@ app.command('serve')
   .action(serve);
 
 app.parse(process.argv);
+
+// No subcommand was passed
+if (!process.argv.slice(2).length) {
+  app.outputHelp();
+}

@@ -8,7 +8,7 @@ function rebuild(event, path) {
   console.log('File changed:', path);
 
   // spawn rebuild
-  spawn('node', ['index.js', 'build'], {
+  spawn('bin/nite-flights', ['build'], {
     stdio: [process.stdin, process.stdout, process.stderr, 'pipe']
   });
 }
