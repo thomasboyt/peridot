@@ -12,13 +12,24 @@ module.exports = function(grunt) {
         username: '<%= secret.ssh_username %>',
         agent: process.env.SSH_AUTH_SOCK,
         showProgress: true,
-        srcBasePath: '_site/',
         createDirectories: true
       },
 
-      all: {
+      posts: {
+        options: {
+          srcBasePath: '_site/',
+        },
         files: {
           './': ['_site/**']
+        }
+      },
+
+      public: {
+        options: {
+          srcBasePath: 'public/',
+        },
+        files: {
+          './': ['public/**']
         }
       }
     },
