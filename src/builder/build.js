@@ -1,17 +1,14 @@
 import {readFileSync, writeFileSync} from 'fs';
 import yaml from 'js-yaml';
 import {zip} from 'lodash';
-
-import React from 'react';
-import Post from '../../components/Post';
-import loadEntries from './loadEntries';
-
 import slug from 'slug';
+import React from 'react';
 
-function getEntryPath(entry) {
-  const slugged = slug(`${entry.date} ${entry.title}`, {lower: true});
-  return `_site/entries/${slugged}`;
-}
+import Page from '../../components/Page';
+import Post from '../../components/Post';
+import List from '../../components/List';
+
+import loadEntries from './loadEntries';
 
 export default async function build() {
   const entriesYaml = readFileSync('_entries.yml', {encoding: 'utf8'});
@@ -27,7 +24,25 @@ export default async function build() {
   });
 
   zip(entries, posts).forEach(([entry, post]) => {
-    const html = React.renderToStaticMarkup(post);
-    writeFileSync(getEntryPath(entry), html, {encoding: 'utf8'});
+    const html = React.renderToStaticMarkup(
+      <Page title={`${entry.title} | Nite Flights`}>
+        {post}
+      </Page>
+    );
+
+    const slugged = slug(`${entry.date} ${entry.title}`, {lower: true});
+    entry.link = `/entries/${slugged}.html`;
+
+    const filePath = `_site/entries/${slugged}.html`;
+    writeFileSync(filePath, html, {encoding: 'utf8'});
   });
+
+  // Build list
+  const listHtml = React.renderToStaticMarkup(
+    <Page title="Nite Flights">
+      <List entries={entries} />
+    </Page>
+  );
+
+  writeFileSync('_site/index.html', listHtml, {encoding: 'utf8'});
 }
