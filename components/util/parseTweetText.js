@@ -34,7 +34,7 @@ export default function transformTweetText(text, entities) {
   const tokens = [];
 
   let lastIdx = 0;
-  entitiesList.forEach((entity) => {
+  entitiesList.forEach((entity, idx) => {
     const [startIdx, endIdx] = entity.indices;
 
     // Add anything before this token into the list
@@ -46,14 +46,14 @@ export default function transformTweetText(text, entities) {
 
     if (entity._type === URL_TYPE) {
       entityContent = (
-        <a href={entity.expanded_url}>
+        <a href={entity.expanded_url} key={idx}>
           {entity.display_url}
         </a>
       );
 
     } else if (entity._type === MENTION_TYPE) {
       entityContent = (
-        <a href={`https://twitter.com/${entity.screen_name}`}>
+        <a href={`https://twitter.com/${entity.screen_name}`} key={idx}>
           @{entity.screen_name}
         </a>
       );

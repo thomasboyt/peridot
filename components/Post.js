@@ -21,8 +21,8 @@ const Post = React.createClass({
 
     const paragraphs = description.split('\n\n');
 
-    const paras = paragraphs.map((paragraph) => (
-      <p>{paragraph}</p>
+    const paras = paragraphs.map((paragraph, idx) => (
+      <p key={idx}>{paragraph}</p>
     ));
 
     return (

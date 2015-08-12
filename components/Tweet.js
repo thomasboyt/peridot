@@ -71,7 +71,7 @@ const Tweet = React.createClass({
           <img src={`${media.media_url_https}:small`} key={media.id_str} />
         );
       } else if (media.type === 'video') {
-        return <Video media={media} />;
+        return <Video media={media} key={media.id_str} />;
       }
     });
   },
