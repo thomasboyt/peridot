@@ -3,8 +3,7 @@ import yaml from 'js-yaml';
 
 import loadEntries from './loadEntries';
 import {renderPosts, renderList} from './renderer';
-
-import {spawn} from 'child-process-promise';
+import buildWebpack from './buildWebpack';
 
 
 export default async function build(options) {
@@ -18,10 +17,6 @@ export default async function build(options) {
   renderList(entries);
 
   if (!options.skipWebpack) {
-    console.log('Building frontend assets...');
-
-    await spawn('./node_modules/.bin/webpack', {
-      stdio: [process.stdin, process.stdout, process.stderr, 'pipe']
-    });
+    buildWebpack();
   }
 }

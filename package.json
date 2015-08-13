@@ -1,12 +1,15 @@
 {
   "name": "nite-flights",
   "version": "1.0.0",
-  "description": "",
+  "description": "A static social media scrapbook generator powered by React.",
   "main": "bin/nite-flights",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "bin": {
+    "nite-flights": "bin/nite-flights"
+  },
+  "author": "Thomas Boyt <me@thomasboyt.com>",
   "license": "MIT",
   "dependencies": {
     "babel": "^5.8.21",
@@ -16,11 +19,7 @@
     "chokidar": "^1.0.5",
     "commander": "^2.8.1",
     "express": "^4.13.3",
-    "grunt": "^0.4.5",
-    "grunt-exec": "^0.4.6",
-    "grunt-ssh": "^0.12.6",
     "js-yaml": "^3.3.1",
-    "load-grunt-tasks": "^3.2.0",
     "lodash": "^3.10.1",
     "mkdirp": "^0.5.1",
     "moment": "^2.10.6",

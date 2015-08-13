@@ -1,16 +1,20 @@
 import express from 'express';
 import chokidar from 'chokidar';
 import {spawn} from 'child_process';
+import {join as pathJoin} from 'path';
 
 import build from './builder';
+import buildWebpack from './builder/buildWebpack';
 
 function rebuild(event, path) {
   console.log('File changed:', path);
 
-  // spawn rebuild
-  spawn('bin/nite-flights', ['build', '--skip-webpack'], {
+  // spawn rebuild so it uses new components/
+  spawn(pathJoin(__dirname, '../bin/nite-flights'), ['build', '--skip-webpack'], {
     stdio: [process.stdin, process.stdout, process.stderr, 'pipe']
   });
+
+  buildWebpack();
 }
 
 export default async function serve() {
@@ -38,9 +42,5 @@ export default async function serve() {
     ignoreInitial: true
   }).on('all', rebuild);
 
-  console.log('Spawning webpack watcher...');
-
-  spawn('./node_modules/.bin/webpack', ['--watch'], {
-    stdio: [process.stdin, process.stdout, process.stderr, 'pipe']
-  });
+  buildWebpack();
 }
