@@ -26,11 +26,21 @@ const Video = React.createClass({
     ];
   },
 
+  handleClick() {
+    const video = React.findDOMNode(this.refs.video);
+
+    if (video.paused) {
+      video.play();
+    } else {
+      video.pause();
+    }
+  },
+
   render() {
     const media = this.props.media;
 
     return (
-      <video controls>
+      <video controls onClick={this.handleClick} ref="video">
         {this.renderSources(media.video_info.variants)}
       </video>
     );
