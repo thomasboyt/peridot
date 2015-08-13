@@ -1,5 +1,5 @@
 import React from 'react';
-import List from '../../components/List';
+import List from '../../components/pages/List';
 
 const mountPoint = document.getElementById('mount-point');
 
