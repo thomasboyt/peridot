@@ -14,7 +14,8 @@ app
 
 app.command('build')
   .description('Build files to _site/')
-  .action(build);
+  .option('--skip-webpack', 'don\'t build frontend assets through webpack')
+  .action(build)
 
 app.command('serve')
   .description('Build and serve files')

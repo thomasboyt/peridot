@@ -8,7 +8,7 @@ function rebuild(event, path) {
   console.log('File changed:', path);
 
   // spawn rebuild
-  spawn('bin/nite-flights', ['build'], {
+  spawn('bin/nite-flights', ['build', '--skip-webpack'], {
     stdio: [process.stdin, process.stdout, process.stderr, 'pipe']
   });
 }
@@ -16,7 +16,9 @@ function rebuild(event, path) {
 export default async function serve() {
   const app = express();
 
-  await build();
+  await build({
+    skipWebpack: true
+  });
 
   app.use(express.static('_site/'));
   app.use(express.static('public/'));
@@ -35,4 +37,10 @@ export default async function serve() {
     ignored: /[\/\\]\./,
     ignoreInitial: true
   }).on('all', rebuild);
+
+  console.log('Spawning webpack watcher...');
+
+  spawn('./node_modules/.bin/webpack', ['--watch'], {
+    stdio: [process.stdin, process.stdout, process.stderr, 'pipe']
+  });
 }

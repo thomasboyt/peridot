@@ -1,10 +1,10 @@
 import build from './build';
 
-export default async function() {
+export default async function(options) {
   console.log('Building...');
 
   try {
-    await build();
+    await build(options);
   } catch(err) {
     console.error('Unhandled error building:');
 
