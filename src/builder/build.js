@@ -27,9 +27,22 @@ export default async function build() {
   });
 
   zip(entries, posts).forEach(([entry, post]) => {
-    const html = React.renderToString(
+    const data = JSON.stringify({
+      post: entry
+    });
+
+    const dataEmbed = {
+      __html: `window.__data__ = ${data};`
+    };
+
+    const renderedPost = {__html: React.renderToString(post)};
+
+    const html = React.renderToStaticMarkup(
       <Page title={`${entry.title} | ${blogTitle}`}>
-        {post}
+        <div id="mount-point" dangerouslySetInnerHTML={renderedPost} />
+
+        <script dangerouslySetInnerHTML={dataEmbed} />
+        <script src="/js/post.bundle.js" />
       </Page>
     );
 
@@ -41,9 +54,21 @@ export default async function build() {
   });
 
   // Build list
+  const listDataEmbed = {
+    __html: `window.__data__ = ${JSON.stringify(entries)};`
+  };
+
+  const renderedList = {__html: React.renderToString(
+    <List entries={entries} />
+  )};
+
   const listHtml = React.renderToStaticMarkup(
     <Page title={blogTitle}>
       <List entries={entries} />
+      <div id="mount-point" dangerouslySetInnerHTML={renderedList} />
+
+      <script dangerouslySetInnerHTML={listDataEmbed} />
+      <script src="/js/list.bundle.js" />
     </Page>
   );
 

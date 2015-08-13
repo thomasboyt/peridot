@@ -16,6 +16,8 @@ const Page = React.createClass({
           <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css" />
           <link href="/normalize.css" rel="stylesheet" />
           <link href="/style.css" rel="stylesheet" />
+
+          <script src="/js/vendor.bundle.js" />
         </head>
 
         <body>

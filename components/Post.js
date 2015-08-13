@@ -46,7 +46,7 @@ const Post = React.createClass({
     const {title, date, tweets, location} = this.props;
 
     return (
-      <div className="entry">
+      <div className="entry" onClick={() => alert('WHAT HATH SCIENCE WROUGHT')}>
         <div className="entry-box">
           <h1 className="title">{title}</h1>
           <p>
