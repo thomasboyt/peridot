@@ -1,6 +1,7 @@
 import React from 'react';
 
 const Page = React.createClass({
+
   propTypes: {
     title: React.PropTypes.string.isRequired,
     children: React.PropTypes.node.isRequired
