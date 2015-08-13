@@ -2,6 +2,11 @@ import React from 'react';
 import _ from 'lodash';
 
 const Video = React.createClass({
+
+  propTypes: {
+    media: React.PropTypes.object.isRequired
+  },
+
   renderSources(variants) {
     const bestMp4 =
       _.chain(variants)

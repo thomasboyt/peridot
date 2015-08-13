@@ -5,6 +5,10 @@ const DATE_STRING = 'ddd. MMMM Do, YYYY';
 
 const List = React.createClass({
 
+  propTypes: {
+    entries: React.PropTypes.array.isRequired
+  },
+
   maybeRenderLink(post) {
     // Only render a link to a post if it has content (tweets, description, etc)
 

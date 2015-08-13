@@ -6,6 +6,16 @@ import Tweet from './Tweet';
 const DATE_STRING = 'ddd. MMMM Do, YYYY';
 
 const Post = React.createClass({
+
+  propTypes: {
+    title: React.PropTypes.string.isRequired,
+    date: React.PropTypes.string.isRequired,
+    location: React.PropTypes.string.isRequired,
+    tweets: React.PropTypes.array.isRequired,
+
+    description: React.PropTypes.string,
+  },
+
   renderTweets(tweets) {
     return tweets.map((tweet) => {
       return (
