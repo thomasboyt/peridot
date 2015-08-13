@@ -6,6 +6,7 @@ body {
   text-align: center;
   background: black;
   color: white;
+  font-family: "Open Sans", sans-serif;
 }
 
 h1 {
@@ -20,7 +21,6 @@ h1 {
 }
 
 .home > p {
-  font-family: Dosis, sans-serif;
   margin-bottom: 40px;
 }
 
@@ -31,11 +31,10 @@ h1 {
   /* little less due to line-height on h2 */
   padding-top: 18px;
   padding-bottom: 20px;
-
-  font-family: Dosis, sans-serif;
 }
 
 .entry-box .title, .entry-box p {
+  font-family: Dosis, sans-serif;
   margin: 0;
 }
 
