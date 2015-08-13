@@ -60,7 +60,6 @@ export function renderList(entries) {
 
   const listHtml = React.renderToStaticMarkup(
     <Page title={blogTitle}>
-      <List entries={entries} />
       <div id="mount-point" dangerouslySetInnerHTML={renderedList} />
 
       <script dangerouslySetInnerHTML={listDataEmbed} />
