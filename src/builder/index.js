@@ -5,6 +5,7 @@ export default async function(options) {
 
   try {
     await build(options);
+
   } catch(err) {
     console.error('Unhandled error building:');
 
@@ -17,10 +18,8 @@ export default async function(options) {
     } else if (err.url) {
       // Failed window.fetch response
       console.log(`${err.url} - ${err.status} ${err.statusText}`);
-
-      err.text().then((body) => {
-        console.log(body);
-      });
+      const body = await err.text();
+      console.log(body);
 
     } else {
       // Other error
