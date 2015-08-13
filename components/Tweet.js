@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import Video from './video';
+import Video from './Video';
 
 import parseTweetText from './util/parseTweetText';
 

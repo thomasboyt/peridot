@@ -5,8 +5,8 @@ import {writeFileSync} from 'fs';
 import {zip} from 'lodash';
 
 import Page from '../../components/Page';
-import Post from '../../components/Post';
-import List from '../../components/List';
+import Post from '../../components/pages/Post';
+import List from '../../components/pages/List';
 
 
 // TODO: load this from a config file

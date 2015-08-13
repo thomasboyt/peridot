@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 
-import Tweet from './Tweet';
+import Tweet from '../Tweet';
 
 const DATE_STRING = 'ddd. MMMM Do, YYYY';
 
@@ -43,12 +43,13 @@ const Post = React.createClass({
   },
 
   render() {
-    const {title, date, tweets, location} = this.props;
+    const {title, date, tweets, location, description} = this.props;
 
     return (
-      <div className="entry" onClick={() => alert('WHAT HATH SCIENCE WROUGHT')}>
+      <div className="entry">
         <div className="entry-box">
           <h1 className="title">{title}</h1>
+
           <p>
             {moment(date, 'YYYY-MM-DD').format(DATE_STRING)}
             <span className="at-sign">
@@ -58,7 +59,7 @@ const Post = React.createClass({
           </p>
         </div>
 
-        {this.renderDescription(this.props.description)}
+        {this.renderDescription(description)}
 
         {this.renderTweets(tweets)}
       </div>
