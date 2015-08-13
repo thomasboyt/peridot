@@ -6,7 +6,7 @@ export default function generateWebpackConfig() {
 
   return {
     resolve: {
-      root: root,
+      root: path.join(root, 'node_modules/'),
       alias: {
         __PROJECT__: process.cwd()
       }
