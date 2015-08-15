@@ -3,11 +3,11 @@ import readline from 'readline';
 
 let indentLevel = 0;
 
-export function enterSection() {
+export function enterLogSection() {
   indentLevel += 1;
 }
 
-export function exitSection() {
+export function exitLogSection() {
   indentLevel -= 1;
   if (indentLevel < 0) {
     throw new Error('Attempted to exit root logging section');

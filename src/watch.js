@@ -4,16 +4,19 @@ import chokidar from 'chokidar';
 
 import buildWebpack from './builder/buildWebpack';
 
-import {log, enterSection, exitSection, createProcessLogger} from './util/logger';
+import {log, enterLogSection, exitLogSection, createProcessLogger} from './util/logger';
+
+const binPath = pathJoin(__dirname, '../bin/nite-flights');
 
 async function rebuild(event, path) {
-  log(`File changed: ${path}`);
+  log(`File "${path}" changed, rebuilding...`);
 
-  enterSection();
+  enterLogSection();
 
   // spawn rebuild so it uses new components/
-  const filesRebuild = new Promise((resolve/*, reject*/) => {
-    const proc = spawn(pathJoin(__dirname, '../bin/nite-flights'), ['build', '--skip-webpack'], {
+  // TODO: reject on non-zero code to display an error message warning of some sort
+  const buildFilesPromise = new Promise((resolve/*, reject*/) => {
+    const proc = spawn(binPath, ['build', '--skip-webpack'], {
       stdio: ['pipe', 'pipe', 'pipe']
     });
 
@@ -22,11 +25,13 @@ async function rebuild(event, path) {
     proc.on('exit', resolve);
   });
 
-  await* [filesRebuild, buildWebpack()];
+  const buildWebpackPromise = buildWebpack();
 
-  exitSection();
+  await* [buildFilesPromise, buildWebpackPromise];
 
-  log('Rebuild complete.');
+  exitLogSection();
+
+  log('...Done!');
 }
 
 export default function watch() {
@@ -34,7 +39,10 @@ export default function watch() {
     '_entries.yml',
     'components/'
   ], {
+    // ignore dotfiles
     ignored: /[\/\\]\./,
+
+    // don't build on initial file add
     ignoreInitial: true
   }).on('all', rebuild);
 }
