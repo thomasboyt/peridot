@@ -37,7 +37,8 @@ async function rebuild(event, path) {
 export default function watch() {
   chokidar.watch([
     '_entries.yml',
-    'components/'
+    'components/',
+    pathJoin(__dirname, '../frontend')
   ], {
     // ignore dotfiles
     ignored: /[\/\\]\./,

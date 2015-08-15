@@ -1,43 +1,51 @@
 import React from 'react';
+import Router from 'react-router';
 
 import {writeFileSync} from 'fs';
 import {zip} from 'lodash';
 import {sync as mkdirp} from 'mkdirp';
 
 import requireFromProject from '../util/requireFromProject';
-
 const Page = requireFromProject('components/Page');
-const Post = requireFromProject('components/pages/Post');
-const List = requireFromProject('components/pages/List');
+
+import routes from '../../app/routes';
+import createStore from '../../app/store';
+import {Promise} from 'es6-promise';
 
 
 // TODO: load this from a config file
 const blogTitle = 'Loud Places';
 
-export function renderPosts(entries) {
-  const posts = entries.map((entry) => {
-    return (
-      <Post {...entry} />
-    );
-  });
-
-  zip(entries, posts).forEach(([entry, post]) => {
-    const data = JSON.stringify({
-      post: entry
+async function renderRoute(location, store) {
+  return new Promise((resolve/*, reject*/) => {
+    Router.run(routes, location, (Root) => {
+      const out = React.renderToString(<Root store={store} />);
+      resolve(out);
     });
+  });
+}
+
+export async function renderPosts(entries) {
+  const locations = entries.map((entry) => `/entries/${entry.slug}/`);
+
+  const store = createStore({entries: entries});
+
+  const renderedEntries = await* locations.map(renderRoute, store);
+
+  zip([entries, renderedEntries], (entry, rendered) => {
+    const data = JSON.stringify(entry);
 
     const dataEmbed = {
       __html: `window.__data__ = ${data};`
     };
 
-    const renderedPost = {__html: React.renderToString(post)};
+    const renderedPost = {__html: rendered};
 
     const html = React.renderToStaticMarkup(
       <Page title={`${entry.title} | ${blogTitle}`}>
         <div id="mount-point" dangerouslySetInnerHTML={renderedPost} />
 
         <script dangerouslySetInnerHTML={dataEmbed} />
-        <script src="/js/post.bundle.js" />
       </Page>
     );
 
@@ -69,7 +77,6 @@ export function renderList(entries) {
       <div id="mount-point" dangerouslySetInnerHTML={renderedList} />
 
       <script dangerouslySetInnerHTML={listDataEmbed} />
-      <script src="/js/list.bundle.js" />
     </Page>
   );
 

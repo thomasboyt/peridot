@@ -8,7 +8,8 @@ export default function generateWebpackConfig() {
     resolve: {
       root: path.join(root, 'node_modules/'),
       alias: {
-        __PROJECT__: process.cwd()
+        __PROJECT__: process.cwd(),
+        './app/projectRequire': './app/projectRequire/projectRequireWebpack'
       }
     },
 
@@ -17,8 +18,7 @@ export default function generateWebpackConfig() {
     },
 
     entry: {
-      post: path.join(root, './frontend/pages/post.js'),
-      list: path.join(root, './frontend/pages/list.js'),
+      app: path.join(root, './frontend/entry.js'),
       vendor: [
         'react'
       ]
