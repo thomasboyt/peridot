@@ -1,8 +1,8 @@
 import React from 'react';
 
-import slug from 'slug';
 import {writeFileSync} from 'fs';
 import {zip} from 'lodash';
+import {sync as mkdirp} from 'mkdirp';
 
 import requireFromProject from '../util/requireFromProject';
 
@@ -41,11 +41,15 @@ export function renderPosts(entries) {
       </Page>
     );
 
-    const slugged = slug(`${entry.date} ${entry.title}`, {lower: true});
-    entry.link = `/entries/${slugged}.html`;
+    // Write entry HTML
+    mkdirp(`_site/entries/${entry.slug}`);
+    const htmlPath = `_site/entries/${entry.slug}/index.html`;
+    writeFileSync(htmlPath, html, {encoding: 'utf8'});
 
-    const filePath = `_site/entries/${slugged}.html`;
-    writeFileSync(filePath, html, {encoding: 'utf8'});
+    // Write entry JSON
+    const jsonPath = `_site/entries/${entry.slug}.json`;
+    const jsonData = JSON.stringify(entry);
+    writeFileSync(jsonPath, jsonData, {encoding: 'utf8'});
   });
 }
 
@@ -70,4 +74,17 @@ export function renderList(entries) {
   );
 
   writeFileSync('_site/index.html', listHtml, {encoding: 'utf8'});
+
+  const shortEntries = entries.map((entry) => {
+    return {
+      title: entry.title,
+      location: entry.location,
+      date: entry.date,
+      slug: entry.slug
+    };
+  });
+
+  const entryJson = JSON.stringify(shortEntries);
+
+  writeFileSync('_site/entries.json', entryJson, {encoding: 'utf8'});
 }

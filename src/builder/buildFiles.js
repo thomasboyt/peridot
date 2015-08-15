@@ -1,5 +1,6 @@
 import {readFileSync} from 'fs';
 import yaml from 'js-yaml';
+import slug from 'slug';
 
 import loadEntries from './loadEntries';
 import {renderPosts, renderList} from './renderer';
@@ -12,6 +13,12 @@ async function buildFilesInternal() {
   const entryData = yaml.safeLoad(entriesYaml);
 
   const entries = await loadEntries(entryData);
+
+  // Add slug
+  entries.forEach((entry) => {
+    const slugged = slug(`${entry.date} ${entry.title}`, {lower: true});
+    entry.slug = slugged;
+  });
 
   renderPosts(entries);
   renderList(entries);
