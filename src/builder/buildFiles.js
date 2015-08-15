@@ -3,10 +3,9 @@ import yaml from 'js-yaml';
 
 import loadEntries from './loadEntries';
 import {renderPosts, renderList} from './renderer';
-import buildWebpack from './buildWebpack';
 
 
-export default async function build(options) {
+export default async function buildFiles() {
   const entriesYaml = readFileSync('_entries.yml', {encoding: 'utf8'});
 
   const entryData = yaml.safeLoad(entriesYaml);
@@ -15,8 +14,4 @@ export default async function build(options) {
 
   renderPosts(entries);
   renderList(entries);
-
-  if (!options.skipWebpack) {
-    buildWebpack();
-  }
 }

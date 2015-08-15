@@ -1,13 +1,14 @@
-import build from './build';
+import buildFiles from './buildFiles';
+import buildWebpack from './buildWebpack';
 
 export default async function(options) {
   console.log('Building...');
 
   try {
-    await build(options);
+    await buildFiles();
 
   } catch(err) {
-    console.error('Unhandled error building:');
+    console.error('Unhandled error building files:');
 
     // warning: lame duck-typing below~
 
@@ -27,6 +28,10 @@ export default async function(options) {
     }
 
     return;
+  }
+
+  if (!options.skipWebpack) {
+    buildWebpack();
   }
 
   console.log('...Done!');
