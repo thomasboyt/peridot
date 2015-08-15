@@ -1,6 +1,13 @@
-import requireFromProject from '../src/util/requireFromProject';
+/*
+ * For __PROJECT__ source, see:
+ *   Node: bin/nite-flights
+ *   Webpack: generateWebpackConfig
+ *
+ * Thanks sokra: https://gist.github.com/thomasboyt/736713bc677124e57936#gistcomment-1551872
+ */
 
-const List = requireFromProject('./components/pages/List');
-const Post = requireFromProject('./components/pages/Post');
+/* global __PROJECT__ */
+const List = require(__PROJECT__ + '/components/pages/List');
+const Post = require(__PROJECT__ + '/components/pages/Post');
 
 export {List, Post};

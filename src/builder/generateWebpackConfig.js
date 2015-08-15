@@ -4,17 +4,9 @@ import path from 'path';
 export default function generateWebpackConfig() {
   const root = path.join(__dirname, '../..');
 
-  const alias = {
-    __PROJECT__: process.cwd(),
-  };
-  const projectRequire = path.join(__dirname, '../../app/projectRequire');
-  alias[projectRequire] = './app/projectRequireWebpack';
-    // './app/projectRequire': './app/projectRequireWebpack'
-
   return {
     resolve: {
-      root: path.join(root, 'node_modules/'),
-      alias: alias
+      root: path.join(root, 'node_modules/')
     },
 
     resolveLoader: {
@@ -34,7 +26,12 @@ export default function generateWebpackConfig() {
     },
 
     plugins: [
-      new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js')
+      new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js'),
+
+      // See app/projectRequire.js
+      new webpack.DefinePlugin({
+        __PROJECT__: JSON.stringify(process.cwd())
+      })
     ],
 
     devtool: 'source-map',
