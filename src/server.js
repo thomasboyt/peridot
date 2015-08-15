@@ -20,9 +20,7 @@ function rebuild(event, path) {
 export default async function serve() {
   const app = express();
 
-  await build({
-    skipWebpack: true
-  });
+  await build();
 
   app.use(express.static('_site/'));
   app.use(express.static('public/'));
@@ -41,6 +39,4 @@ export default async function serve() {
     ignored: /[\/\\]\./,
     ignoreInitial: true
   }).on('all', rebuild);
-
-  buildWebpack();
 }
