@@ -4,13 +4,17 @@ import path from 'path';
 export default function generateWebpackConfig() {
   const root = path.join(__dirname, '../..');
 
+  const alias = {
+    __PROJECT__: process.cwd(),
+  };
+  const projectRequire = path.join(__dirname, '../../app/projectRequire');
+  alias[projectRequire] = './app/projectRequireWebpack';
+    // './app/projectRequire': './app/projectRequireWebpack'
+
   return {
     resolve: {
       root: path.join(root, 'node_modules/'),
-      alias: {
-        __PROJECT__: process.cwd(),
-        './app/projectRequire': './app/projectRequire/projectRequireWebpack'
-      }
+      alias: alias
     },
 
     resolveLoader: {
@@ -18,7 +22,7 @@ export default function generateWebpackConfig() {
     },
 
     entry: {
-      app: path.join(root, './frontend/entry.js'),
+      app: path.join(root, './app/entry.js'),
       vendor: [
         'react'
       ]

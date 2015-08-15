@@ -30,20 +30,18 @@ export async function renderPosts(entries) {
 
   const store = createStore({entries: entries});
 
-  const renderedEntries = await* locations.map(renderRoute, store);
+  const renderedEntries = await* locations.map((loc) => renderRoute(loc, store));
 
-  zip([entries, renderedEntries], (entry, rendered) => {
+  zip([entries, renderedEntries], (entry, renderedEntry) => {
     const data = JSON.stringify(entry);
 
     const dataEmbed = {
       __html: `window.__data__ = ${data};`
     };
 
-    const renderedPost = {__html: rendered};
-
     const html = React.renderToStaticMarkup(
       <Page title={`${entry.title} | ${blogTitle}`}>
-        <div id="mount-point" dangerouslySetInnerHTML={renderedPost} />
+        <div id="mount-point" dangerouslySetInnerHTML={{__html: renderedEntry}} />
 
         <script dangerouslySetInnerHTML={dataEmbed} />
       </Page>
@@ -62,26 +60,7 @@ export async function renderPosts(entries) {
 }
 
 
-export function renderList(entries) {
-  // Build list
-  const listDataEmbed = {
-    __html: `window.__data__ = ${JSON.stringify({entries: entries})};`
-  };
-
-  const renderedList = {__html: React.renderToString(
-    <List entries={entries} />
-  )};
-
-  const listHtml = React.renderToStaticMarkup(
-    <Page title={blogTitle}>
-      <div id="mount-point" dangerouslySetInnerHTML={renderedList} />
-
-      <script dangerouslySetInnerHTML={listDataEmbed} />
-    </Page>
-  );
-
-  writeFileSync('_site/index.html', listHtml, {encoding: 'utf8'});
-
+export async function renderList(entries) {
   const shortEntries = entries.map((entry) => {
     return {
       title: entry.title,
@@ -92,6 +71,24 @@ export function renderList(entries) {
   });
 
   const entryJson = JSON.stringify(shortEntries);
+
+  const store = createStore({entries: entries});
+
+  const renderedList = await renderRoute('/', store);
+
+  const listDataEmbed = {
+    __html: `window.__data__ = ${entryJson};`
+  };
+
+  const listHtml = React.renderToStaticMarkup(
+    <Page title={blogTitle}>
+      <div id="mount-point" dangerouslySetInnerHTML={{__html: renderedList}} />
+
+      <script dangerouslySetInnerHTML={listDataEmbed} />
+    </Page>
+  );
+
+  writeFileSync('_site/index.html', listHtml, {encoding: 'utf8'});
 
   writeFileSync('_site/entries.json', entryJson, {encoding: 'utf8'});
 }

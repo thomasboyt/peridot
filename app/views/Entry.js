@@ -37,4 +37,3 @@ function getState(state) {
 }
 
 export default connect(getState)(Entry);
-
