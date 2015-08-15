@@ -1,26 +1,13 @@
 import express from 'express';
-import chokidar from 'chokidar';
-import {spawn} from 'child_process';
-import {join as pathJoin} from 'path';
+import {log} from './util/logger';
 
 import build from './builder';
-import buildWebpack from './builder/buildWebpack';
-
-function rebuild(event, path) {
-  console.log('File changed:', path);
-
-  // spawn rebuild so it uses new components/
-  spawn(pathJoin(__dirname, '../bin/nite-flights'), ['build', '--skip-webpack'], {
-    stdio: [process.stdin, process.stdout, process.stderr, 'pipe']
-  });
-
-  buildWebpack();
-}
+import watch from './watch';
 
 export default async function serve() {
-  const app = express();
-
   await build();
+
+  const app = express();
 
   app.use(express.static('_site/'));
   app.use(express.static('public/'));
@@ -29,14 +16,8 @@ export default async function serve() {
     const host = server.address().address;
     const port = server.address().port;
 
-    console.log('Listening at http://%s:%s', host, port);
+    log(`Listening at http://${host}:${port}`);
   });
 
-  chokidar.watch([
-    '_entries.yml',
-    'components/'
-  ], {
-    ignored: /[\/\\]\./,
-    ignoreInitial: true
-  }).on('all', rebuild);
+  watch();
 }

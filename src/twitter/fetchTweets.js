@@ -2,6 +2,8 @@ import fetch from 'node-fetch';
 
 import getToken from './getToken';
 
+import {log} from '../util/logger';
+
 export default async function fetchTweets(ids) {
   const token = await getToken();
 
@@ -23,7 +25,7 @@ export default async function fetchTweets(ids) {
     return await resp.json();
 
   } catch(err) {
-    console.log('error fetching tweets');
+    log('error fetching tweets');
     throw err;
   }
 }

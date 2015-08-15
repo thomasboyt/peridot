@@ -3,6 +3,7 @@ import yaml from 'js-yaml';
 
 import loadEntries from './loadEntries';
 import {renderPosts, renderList} from './renderer';
+import {log} from '../util/logger';
 
 
 async function buildFilesInternal() {
@@ -17,34 +18,34 @@ async function buildFilesInternal() {
 }
 
 export default async function buildFilesWrapper() {
-  console.log('Starting files build...');
+  log('Starting files build...');
 
   try {
     await buildFilesInternal();
 
   } catch(err) {
-    console.error('Unhandled error building files:');
+    log('Unhandled error building files:');
 
     // warning: lame duck-typing below
 
     if (err.stack) {
       // JS errors
-      console.log(err.stack);
+      log(err.stack);
 
     } else if (err.url) {
       // Failed window.fetch response
       // e.g. twitter fetch
-      console.log(`${err.url} - ${err.status} ${err.statusText}`);
+      log(`${err.url} - ${err.status} ${err.statusText}`);
       const body = await err.text();
-      console.log(body);
+      log(body);
 
     } else {
       // Other error
-      console.log(err);
+      log(err);
     }
 
     return;
   }
 
-  console.log('Finished files build');
+  log('Finished files build');
 }
