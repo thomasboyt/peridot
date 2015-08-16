@@ -33,6 +33,7 @@ export default function generateWebpackConfig() {
         __PROJECT__: JSON.stringify(process.cwd())
       }),
 
+      // Globalize React
       new webpack.ProvidePlugin({
         'React': 'react'
       })

@@ -1,3 +1,6 @@
+// Polyfills window.fetch
+import 'whatwg-fetch';
+
 import React from 'react';
 import Router, {HistoryLocation} from 'react-router';
 import {Provider} from 'react-redux';
