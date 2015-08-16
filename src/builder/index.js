@@ -9,8 +9,9 @@ export default async function(options) {
   if (!options.skipPages) {
     builders.push(buildFiles());
   }
+
   if (!options.skipWebpack) {
-    builders.push(buildWebpack());
+    builders.push(buildWebpack(options));
   }
 
   await* builders;

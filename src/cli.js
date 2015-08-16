@@ -16,6 +16,7 @@ app.command('build')
   .description('Build files to _site/')
   .option('--skip-webpack', 'don\'t build frontend assets through webpack')
   .option('--skip-pages', 'don\'t build static HTML or JSON')
+  .option('--optimize', 'minify Webpack bundle')
   .action(build);
 
 app.command('serve')

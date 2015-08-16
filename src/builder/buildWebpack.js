@@ -3,9 +3,21 @@ import generateWebpackConfig from './generateWebpackConfig';
 import {Promise} from 'es6-promise';
 import {log} from '../util/logger';
 
-const compiler = webpack(generateWebpackConfig());
+let compiler;
 
-function runWebpack() {
+function runWebpack(optimize = false) {
+  // Lazily instantiate the compiler on first run
+  if (!compiler) {
+    const config = generateWebpackConfig();
+
+    if (optimize) {
+      config.plugins.push(new webpack.optimize.UglifyJsPlugin());
+      config.devtool = null;
+    }
+
+    compiler = webpack(config);
+  }
+
   return new Promise((resolve, reject) => {
     compiler.run((err, stats) => {
       if (err) {
@@ -17,14 +29,13 @@ function runWebpack() {
   });
 }
 
-// TODO: This currently just returns immediately since I need to promiseify webpack to make it awaitable
-export default async function buildWebpack() {
+export default async function buildWebpack(options = {}) {
   log('Starting Webpack build...');
 
   let stats;
 
   try {
-    stats = await runWebpack();
+    stats = await runWebpack(options);
 
   } catch(err) {
     log('Unhandled fatal error in Webpack build:');
