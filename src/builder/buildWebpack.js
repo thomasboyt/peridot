@@ -61,7 +61,9 @@ export default async function buildWebpack(options = {}) {
     });
   }
 
-  log('Finished Webpack build');
+  const time = jsonStats.time / 1000;
+
+  log(`Finished Webpack build (${time} s)`);
 }
 
 

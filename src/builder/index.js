@@ -1,4 +1,4 @@
-import buildFiles from './buildFiles';
+import buildPages from './buildPages';
 import buildWebpack from './buildWebpack';
 
 export default async function(options) {
@@ -7,7 +7,7 @@ export default async function(options) {
   const builders = [];
 
   if (!options.skipPages) {
-    builders.push(buildFiles());
+    builders.push(buildPages());
   }
 
   if (!options.skipWebpack) {

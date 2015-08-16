@@ -1,38 +1,32 @@
 import {readFileSync} from 'fs';
 import yaml from 'js-yaml';
-import slug from 'slug';
 
 import loadEntries from './loadEntries';
 import {renderPosts, renderList} from './renderer';
 import {log} from '../util/logger';
 
 
-async function buildFilesInternal() {
+async function buildPagesInternal() {
   const entriesYaml = readFileSync('_entries.yml', {encoding: 'utf8'});
 
   const entryData = yaml.safeLoad(entriesYaml);
 
   const entries = await loadEntries(entryData);
 
-  // TODO: move this somewhere
-  entries.forEach((entry) => {
-    const slugged = slug(`${entry.date} ${entry.title}`, {lower: true});
-    entry.slug = slugged;
-    entry.hasContent = entry.tweets.length > 0 || entry.description;
-  });
-
   await renderPosts(entries);
   await renderList(entries);
 }
 
-export default async function buildFilesWrapper() {
-  log('Starting files build...');
+export default async function buildPagesWrapper() {
+  log('Starting pages build...');
+
+  const startTime = new Date();
 
   try {
-    await buildFilesInternal();
+    await buildPagesInternal();
 
   } catch(err) {
-    log('Unhandled error building files:');
+    log('Unhandled error building pages:');
 
     // warning: lame duck-typing below
 
@@ -55,5 +49,9 @@ export default async function buildFilesWrapper() {
     return;
   }
 
-  log('Finished files build');
+  const endTime = new Date();
+
+  const time = (endTime - startTime) / 1000
+
+  log(`Finished pages build (${time} s)`);
 }

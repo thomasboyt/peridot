@@ -15,7 +15,7 @@ async function rebuild(event, path) {
 
   // spawn rebuild so it uses new components/
   // TODO: reject on non-zero code to display an error message warning of some sort
-  const buildFilesPromise = new Promise((resolve/*, reject*/) => {
+  const buildPagesPromise = new Promise((resolve/*, reject*/) => {
     const proc = spawn(binPath, ['build', '--skip-webpack'], {
       stdio: ['pipe', 'pipe', 'pipe']
     });
@@ -27,7 +27,7 @@ async function rebuild(event, path) {
 
   const buildWebpackPromise = buildWebpack();
 
-  await* [buildFilesPromise, buildWebpackPromise];
+  await* [buildPagesPromise, buildWebpackPromise];
 
   exitLogSection();
 

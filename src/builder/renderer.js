@@ -14,7 +14,7 @@ import createStore from '../../app/store';
 import {Provider} from 'react-redux';
 
 
-async function renderRoute(location, store) {
+function renderRoute(location, store) {
   return new Promise((resolve/*, reject*/) => {
     Router.run(routes, location, (Root, routerState) => {
 
