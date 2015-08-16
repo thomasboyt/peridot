@@ -35,7 +35,7 @@ export default async function buildPagesWrapper() {
       log(err.stack);
 
     } else if (err.url) {
-      // Failed window.fetch response
+      // Failed fetch response
       // e.g. twitter fetch
       log(`${err.url} - ${err.status} ${err.statusText}`);
       const body = await err.text();
@@ -51,7 +51,7 @@ export default async function buildPagesWrapper() {
 
   const endTime = new Date();
 
-  const time = (endTime - startTime) / 1000
+  const time = (endTime - startTime) / 1000;
 
   log(`Finished pages build (${time} s)`);
 }
