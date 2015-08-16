@@ -16,15 +16,11 @@ const Index = React.createClass({
   render() {
     const {entries} = this.props;
 
-    // TODO: Loading state for local
-    if (!entries) {
-      return (
-        <p>Loading...</p>
-      );
-    }
+    // TODO: use some sort of loading status here instead
+    const isLoading = !entries;
 
     return (
-      <List entries={entries} />
+      <List isLoading={isLoading} entries={entries} />
     );
   }
 });

@@ -5,7 +5,7 @@ const initialState = {
   entries: null,
 
   // Holds the currently-viewed entry
-  entryDetail: {}
+  entryDetail: null
 };
 
 export default function entries(state = initialState, action) {

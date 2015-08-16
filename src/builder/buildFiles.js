@@ -14,11 +14,11 @@ async function buildFilesInternal() {
 
   const entries = await loadEntries(entryData);
 
-  // Add slug
+  // TODO: move this somewhere
   entries.forEach((entry) => {
     const slugged = slug(`${entry.date} ${entry.title}`, {lower: true});
     entry.slug = slugged;
-    entry.hasContent = entry.tweets || entry.description;
+    entry.hasContent = entry.tweets.length > 0 || entry.description;
   });
 
   await renderPosts(entries);

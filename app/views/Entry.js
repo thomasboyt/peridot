@@ -10,7 +10,7 @@ const Entry = React.createClass({
     const {dispatch, entryDetail} = this.props;
     const {slug} = this.props.params;
 
-    if (entryDetail.slug !== slug) {
+    if (!(entryDetail && entryDetail.slug === slug)) {
       dispatch(fetchEntry(slug));
     }
   },
@@ -20,14 +20,10 @@ const Entry = React.createClass({
     const {entryDetail} = this.props;
 
     // TODO: use some sort of loading status here instead
-    if (entryDetail.slug !== slug) {
-      return (
-        <p>Loading...</p>
-      );
-    }
+    const isLoading = !(entryDetail && entryDetail.slug === slug);
 
     return (
-      <Post {...entryDetail} />
+      <Post isLoading={isLoading} entry={entryDetail} />
     );
   }
 });
