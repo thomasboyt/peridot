@@ -35,7 +35,7 @@ export default async function buildWebpack(options = {}) {
   let stats;
 
   try {
-    stats = await runWebpack(options);
+    stats = await runWebpack(options.optimize);
 
   } catch(err) {
     log('Unhandled fatal error in Webpack build:');
