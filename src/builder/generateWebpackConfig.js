@@ -31,6 +31,10 @@ export default function generateWebpackConfig() {
       // See app/projectRequire.js
       new webpack.DefinePlugin({
         __PROJECT__: JSON.stringify(process.cwd())
+      }),
+
+      new webpack.ProvidePlugin({
+        'React': 'react'
       })
     ],
 

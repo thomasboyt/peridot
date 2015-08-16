@@ -9,7 +9,7 @@ const Index = React.createClass({
   componentDidMount() {
     const {dispatch} = this.props;
 
-    // TODO: Check if loaded first
+    // TODO: don't load if already loaded?
     dispatch(fetchEntriesList());
   },
 
@@ -17,6 +17,11 @@ const Index = React.createClass({
     const {entries} = this.props;
 
     // TODO: Loading state for local
+    if (!entries) {
+      return (
+        <p>Loading...</p>
+      );
+    }
 
     return (
       <List entries={entries} />

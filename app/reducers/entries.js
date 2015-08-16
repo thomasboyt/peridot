@@ -1,16 +1,25 @@
-import {FETCH_ENTRY} from '../actions/entries';
+import {FETCH_ENTRY, FETCH_ENTRIES_LIST} from '../actions/entries';
 
 const initialState = {
-  entries: []
+  // Holds the list of entries
+  entries: null,
+
+  // Holds the currently-viewed entry
+  entryDetail: {}
 };
 
 export default function entries(state = initialState, action) {
   if (action.type === FETCH_ENTRY) {
-    // TODO: don't insert if already exists
-    const entries = entries.concat([action.entry]);
-
     return Object.assign({}, state, {
-      entries: entries
+      entryDetail: action.entry
     });
+
+  } else if (action.type === FETCH_ENTRIES_LIST) {
+    return Object.assign({}, state, {
+      entries: action.entries
+    });
+
+  } else {
+    return state;
   }
 }

@@ -4,13 +4,14 @@ import Router from 'react-router';
 import {writeFileSync} from 'fs';
 import {zip} from 'lodash';
 import {sync as mkdirp} from 'mkdirp';
+import {Promise} from 'es6-promise';
 
 import requireFromProject from '../util/requireFromProject';
 const Page = requireFromProject('components/Page');
 
 import routes from '../../app/routes';
 import createStore from '../../app/store';
-import {Promise} from 'es6-promise';
+import {Provider} from 'react-redux';
 
 
 // TODO: load this from a config file
@@ -18,25 +19,35 @@ const blogTitle = 'Loud Places';
 
 async function renderRoute(location, store) {
   return new Promise((resolve/*, reject*/) => {
-    Router.run(routes, location, (Root) => {
-      const out = React.renderToString(<Root store={store} />);
+    Router.run(routes, location, (Root, routerState) => {
+
+      const out = React.renderToString(
+        <Provider store={store}>
+          {() => <Root routerState={routerState} />}
+        </Provider>
+      );
+
       resolve(out);
     });
   });
 }
 
 export async function renderPosts(entries) {
-  const locations = entries.map((entry) => `/entries/${entry.slug}/`);
+  const renderedEntries = await* entries.map((entry) => {
+    const url = `/entries/${entry.slug}/`;
 
-  const store = createStore({entries: entries});
+    const store = createStore({
+      entryDetail: entry
+    });
 
-  const renderedEntries = await* locations.map((loc) => renderRoute(loc, store));
+    return renderRoute(url, store);
+  });
 
-  zip([entries, renderedEntries], (entry, renderedEntry) => {
-    const data = JSON.stringify(entry);
+  zip(entries, renderedEntries).map(([entry, renderedEntry]) => {
+    const jsonEntry = JSON.stringify(entry);
 
     const dataEmbed = {
-      __html: `window.__data__ = ${data};`
+      __html: `window.__data__ = {entryDetail: ${jsonEntry}};`
     };
 
     const html = React.renderToStaticMarkup(
@@ -53,9 +64,8 @@ export async function renderPosts(entries) {
     writeFileSync(htmlPath, html, {encoding: 'utf8'});
 
     // Write entry JSON
-    const jsonPath = `_site/entries/${entry.slug}.json`;
-    const jsonData = JSON.stringify(entry);
-    writeFileSync(jsonPath, jsonData, {encoding: 'utf8'});
+    const jsonPath = `_site/entries/${entry.slug}/data.json`;
+    writeFileSync(jsonPath, jsonEntry, {encoding: 'utf8'});
   });
 }
 
@@ -66,7 +76,8 @@ export async function renderList(entries) {
       title: entry.title,
       location: entry.location,
       date: entry.date,
-      slug: entry.slug
+      slug: entry.slug,
+      hasContent: entry.hasContent
     };
   });
 
@@ -77,7 +88,7 @@ export async function renderList(entries) {
   const renderedList = await renderRoute('/', store);
 
   const listDataEmbed = {
-    __html: `window.__data__ = ${entryJson};`
+    __html: `window.__data__ = {entries: ${entryJson}};`
   };
 
   const listHtml = React.renderToStaticMarkup(

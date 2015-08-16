@@ -7,5 +7,7 @@ require('babel/register')({
 // See app/projectRequire.js
 // This has to be set here because Babel needs to be able to static-analyze modules, I guess?
 global.__PROJECT__ = process.cwd();
+global.React = require('react');
+global.Link = require('react-router').Link;
 
 require('../src/cli');

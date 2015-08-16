@@ -38,7 +38,7 @@ export default function watch() {
   chokidar.watch([
     '_entries.yml',
     'components/',
-    pathJoin(__dirname, '../frontend')
+    pathJoin(__dirname, '../app')
   ], {
     // ignore dotfiles
     ignored: /[\/\\]\./,

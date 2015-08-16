@@ -6,34 +6,34 @@ import {fetchEntry} from '../actions/entries';
 import {Post} from '../projectRequire';
 
 const Entry = React.createClass({
-  componentDidMount() {
-    const {dispatch} = this.props;
+  componentWillMount() {
+    const {dispatch, entryDetail} = this.props;
     const {slug} = this.props.params;
 
-    // TODO: Check if loaded first
-    dispatch(fetchEntry(slug));
+    if (entryDetail.slug !== slug) {
+      dispatch(fetchEntry(slug));
+    }
   },
 
   render() {
     const {slug} = this.props.params;
-    const {entries} = this.props;
+    const {entryDetail} = this.props;
 
-    const entry = entries.filter((entry) => entry.slug === slug)[0];
-
-    if (!entry) {
+    // TODO: use some sort of loading status here instead
+    if (entryDetail.slug !== slug) {
       return (
         <p>Loading...</p>
       );
     }
 
     return (
-      <Post {...entry} />
+      <Post {...entryDetail} />
     );
   }
 });
 
 function getState(state) {
-  return {entries: state.entries};
+  return {entryDetail: state.entryDetail};
 }
 
 export default connect(getState)(Entry);

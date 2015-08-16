@@ -18,10 +18,11 @@ async function buildFilesInternal() {
   entries.forEach((entry) => {
     const slugged = slug(`${entry.date} ${entry.title}`, {lower: true});
     entry.slug = slugged;
+    entry.hasContent = entry.tweets || entry.description;
   });
 
-  renderPosts(entries);
-  renderList(entries);
+  await renderPosts(entries);
+  await renderList(entries);
 }
 
 export default async function buildFilesWrapper() {
