@@ -14,9 +14,6 @@ import createStore from '../../app/store';
 import {Provider} from 'react-redux';
 
 
-// TODO: load this from a config file
-const blogTitle = 'Loud Places';
-
 async function renderRoute(location, store) {
   return new Promise((resolve/*, reject*/) => {
     Router.run(routes, location, (Root, routerState) => {
@@ -51,7 +48,7 @@ export async function renderPosts(entries) {
     };
 
     const html = React.renderToStaticMarkup(
-      <Page title={`${entry.title} | ${blogTitle}`}>
+      <Page title={`${entry.title}`}>
         <div id="mount-point" dangerouslySetInnerHTML={{__html: renderedEntry}} />
 
         <script dangerouslySetInnerHTML={dataEmbed} />
@@ -92,7 +89,7 @@ export async function renderList(entries) {
   };
 
   const listHtml = React.renderToStaticMarkup(
-    <Page title={blogTitle}>
+    <Page title="Home">
       <div id="mount-point" dangerouslySetInnerHTML={{__html: renderedList}} />
 
       <script dangerouslySetInnerHTML={listDataEmbed} />
