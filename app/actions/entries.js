@@ -18,7 +18,6 @@ export function fetchEntry(slug) {
 
 export function fetchEntriesList() {
   return async function (dispatch) {
-    // TODO: polyfill fetch here
     const resp = await window.fetch('/entries.json');
 
     // TODO: handle errors
