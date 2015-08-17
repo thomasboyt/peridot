@@ -2,8 +2,10 @@ import {readFileSync} from 'fs';
 import yaml from 'js-yaml';
 
 import loadEntries from './loadEntries';
-import {renderPosts, renderList} from './renderer';
 import {log} from '../util/logger';
+
+import renderEntries from './render/renderEntries';
+import renderList from './render/renderList';
 
 
 async function buildPagesInternal() {
@@ -13,7 +15,7 @@ async function buildPagesInternal() {
 
   const entries = await loadEntries(entryData);
 
-  await renderPosts(entries);
+  await renderEntries(entries);
   await renderList(entries);
 }
 
