@@ -7,7 +7,7 @@
  */
 
 /* global __PROJECT__ */
-const List = require(__PROJECT__ + '/components/pages/List');
-const Post = require(__PROJECT__ + '/components/pages/Post');
+const List = require(__PROJECT__ + '/components/layouts/List');
+const Post = require(__PROJECT__ + '/components/layouts/Post');
 
 export {List, Post};

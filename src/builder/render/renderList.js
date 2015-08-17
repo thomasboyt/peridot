@@ -1,14 +1,6 @@
 import {writeFileSync} from 'fs';
 
-import React from 'react';
-import DocumentTitle from 'react-document-title';
-
-import createStore from '../../../app/store';
-
-import renderRoute from './renderRoute';
-
-import requireFromProject from '../../util/requireFromProject';
-const Page = requireFromProject('components/Page');
+import renderPage from './renderPage';
 
 
 export default async function renderList(entries) {
@@ -22,26 +14,16 @@ export default async function renderList(entries) {
     };
   });
 
-  const entryJson = JSON.stringify(shortEntries);
-
-  const store = createStore({entries: entries});
-
-  const renderedList = await renderRoute('/', store);
-  const title = DocumentTitle.rewind();
-
-  const listDataEmbed = {
-    __html: `window.__data__ = {entries: ${entryJson}};`
+  const data = {
+    entries: shortEntries
   };
 
-  const listHtml = React.renderToStaticMarkup(
-    <Page pageTitle={title}>
-      <div id="mount-point" dangerouslySetInnerHTML={{__html: renderedList}} />
+  await renderPage({
+    data: data,
+    url: '/',
+    path: '_site/index.html'
+  });
 
-      <script dangerouslySetInnerHTML={listDataEmbed} />
-    </Page>
-  );
-
-  writeFileSync('_site/index.html', listHtml, {encoding: 'utf8'});
-
+  const entryJson = JSON.stringify(shortEntries);
   writeFileSync('_site/entries.json', entryJson, {encoding: 'utf8'});
 }

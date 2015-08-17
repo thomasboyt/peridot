@@ -5,8 +5,11 @@ import Router from 'react-router';
 import {Provider} from 'react-redux';
 
 import routes from '../../../app/routes';
+import createStore from '../../../app/store';
 
-export default function renderRoute(location, store) {
+export default function renderRoute(location, data) {
+  const store = createStore(data);
+
   return new Promise((resolve/*, reject*/) => {
     Router.run(routes, location, (Root, routerState) => {
 
