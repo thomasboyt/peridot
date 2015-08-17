@@ -8,7 +8,24 @@ import {log, enterLogSection, exitLogSection, createProcessLogger} from './util/
 
 const binPath = pathJoin(__dirname, '../bin/nite-flights');
 
-async function rebuild(event, path) {
+// hmmmm
+let queuedPath = null;
+let building = false;
+
+function rebuildOrQueue(event, path) {
+  queuedPath = path;
+
+  if (!building) {
+    rebuild();
+  }
+}
+
+async function rebuild() {
+  const path = queuedPath;
+
+  building = true;
+  queuedPath = null;
+
   log(`File "${path}" changed, rebuilding...`);
 
   enterLogSection();
@@ -32,6 +49,12 @@ async function rebuild(event, path) {
   exitLogSection();
 
   log('...Done!');
+
+  if (queuedPath) {
+    rebuild();
+  } else {
+    building = false;
+  }
 }
 
 export default function watch() {
@@ -45,5 +68,5 @@ export default function watch() {
 
     // don't build on initial file add
     ignoreInitial: true
-  }).on('all', rebuild);
+  }).on('all', rebuildOrQueue);
 }
