@@ -13,7 +13,7 @@ function loadEntry(entry) {
   entry.slug = slugged;
 
   // Add hasContent (used to determine whether to link to page or not)
-  entry.hasContent = entry.tweets || entry.description;
+  entry.hasContent = !!(entry.tweets || entry.description);
 
   // Set empty tweets if none exist so later code can be lazy about checking existence
   if (!entry.tweets) {
