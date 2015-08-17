@@ -5,3 +5,6 @@ global.__PROJECT__ = process.cwd();
 // React *in Node*
 // See: https://gist.github.com/thomasboyt/873ee81a5ddf65a1af08
 global.React = require('react');
+
+// Same dealio. Stateful components :(
+global.DocumentTitle = require('react-document-title');

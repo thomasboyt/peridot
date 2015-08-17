@@ -33,9 +33,11 @@ export default function generateWebpackConfig() {
         __PROJECT__: JSON.stringify(process.cwd())
       }),
 
-      // Globalize React
+      // Globalize singleton deps
+      // See src/injectGlobals.js
       new webpack.ProvidePlugin({
-        'React': 'react'
+        'React': 'react',
+        'DocumentTitle': 'react-document-title'
       })
     ],
 

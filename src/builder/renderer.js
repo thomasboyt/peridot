@@ -12,6 +12,7 @@ const Page = requireFromProject('components/Page');
 import routes from '../../app/routes';
 import createStore from '../../app/store';
 import {Provider} from 'react-redux';
+import DocumentTitle from 'react-document-title';
 
 
 function renderRoute(location, store) {
@@ -37,10 +38,13 @@ export async function renderPosts(entries) {
       entryDetail: entry
     });
 
-    return renderRoute(url, store);
+    const renderedEntry = renderRoute(url, store);
+    const title = DocumentTitle.rewind();
+
+    return {entry, renderedEntry, title};
   });
 
-  zip(entries, renderedEntries).map(([entry, renderedEntry]) => {
+  renderedEntries.map(({entry, renderedEntry, title}) => {
     const jsonEntry = JSON.stringify(entry);
 
     const dataEmbed = {
@@ -48,7 +52,7 @@ export async function renderPosts(entries) {
     };
 
     const html = React.renderToStaticMarkup(
-      <Page title={`${entry.title}`}>
+      <Page pageTitle={title}>
         <div id="mount-point" dangerouslySetInnerHTML={{__html: renderedEntry}} />
 
         <script dangerouslySetInnerHTML={dataEmbed} />
@@ -83,13 +87,14 @@ export async function renderList(entries) {
   const store = createStore({entries: entries});
 
   const renderedList = await renderRoute('/', store);
+  const title = DocumentTitle.rewind();
 
   const listDataEmbed = {
     __html: `window.__data__ = {entries: ${entryJson}};`
   };
 
   const listHtml = React.renderToStaticMarkup(
-    <Page title="Home">
+    <Page pageTitle={title}>
       <div id="mount-point" dangerouslySetInnerHTML={{__html: renderedList}} />
 
       <script dangerouslySetInnerHTML={listDataEmbed} />
