@@ -9,8 +9,13 @@ export default async function renderEntries(entries) {
   for (let entry of entries) {
     const url = `/entries/${entry.slug}/`;
 
+    const hydratedEntries = {};
+    hydratedEntries[entry.slug] = true;
+
     const data = {
-      entryDetail: entry
+      entries: [entry],
+      hydratedEntries: hydratedEntries,
+      hydratedList: false
     };
 
     mkdirp(`_site/entries/${entry.slug}`);

@@ -7,26 +7,29 @@ import {List} from '../projectRequire';
 
 const Index = React.createClass({
   componentDidMount() {
-    const {dispatch} = this.props;
+    const {dispatch, hydratedList} = this.props;
 
-    // TODO: don't load if already loaded?
-    dispatch(fetchEntriesList());
+    if (!hydratedList) {
+      dispatch(fetchEntriesList());
+    }
   },
 
   render() {
-    const {entries} = this.props;
-
-    // TODO: use some sort of loading status here instead
-    const isLoading = !entries;
+    const {entries, isLoading, fetchError} = this.props;
 
     return (
-      <List isLoading={isLoading} entries={entries} />
+      <List isLoading={isLoading} fetchError={fetchError} entries={entries} />
     );
   }
 });
 
 function getState(state) {
-  return {entries: state.entries};
+  return {
+    entries: state.entries,
+    isLoading: state.fetchEntriesListPending,
+    fetchError: state.fetchEntriesListError,
+    hydratedList: state.hydratedList
+  };
 }
 
 export default connect(getState)(Index);

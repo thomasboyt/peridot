@@ -1,31 +1,30 @@
-export const FETCH_ENTRY = 'FETCH_ENTRY';
-export const FETCH_ENTRIES_LIST = 'FETCH_ENTRIES_LIST';
+import apiRequest from '../util/apiRequest';
+import createAsyncAction from '../util/createAsyncAction';
 
-export function fetchEntry(slug) {
-  return async function (dispatch) {
-    const resp = await window.fetch(`/entries/${slug}/data.json`);
+export const FETCH_ENTRY = 'fetchEntry';
+export const FETCH_ENTRIES_LIST = 'fetchEntriesList';
 
-    // TODO: handle errors
-    const data = await resp.json();
-
-    dispatch({
-      type: FETCH_ENTRY,
-      slug: slug,
-      entry: data
-    });
-  };
+function timeout(ms) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
 }
 
-export function fetchEntriesList() {
-  return async function (dispatch) {
-    const resp = await window.fetch('/entries.json');
+export const fetchEntry = createAsyncAction(FETCH_ENTRY, async (slug) => {
+  const data = await apiRequest(`/entries/${slug}/data.json`);
 
-    // TODO: handle errors
-    const data = await resp.json();
-
-    dispatch({
-      type: FETCH_ENTRIES_LIST,
-      entries: data
-    });
+  return {
+    slug: slug,
+    entry: data
   };
-}
+});
+
+export const fetchEntriesList = createAsyncAction(FETCH_ENTRIES_LIST, async () => {
+  await timeout(5000);
+
+  const data = await apiRequest('/entries.json');
+
+  return {
+    entries: data
+  };
+});

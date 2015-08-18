@@ -1,25 +1,61 @@
-import {FETCH_ENTRY, FETCH_ENTRIES_LIST} from '../actions/entries';
+import _ from 'lodash';
+
+import {handleActions} from 'redux-actions';
+import createAsyncActionHandlers from '../util/createAsyncActionHandlers';
+
+import {
+  FETCH_ENTRY,
+  FETCH_ENTRIES_LIST
+} from '../actions/entries';
 
 const initialState = {
   // Holds the list of entries
-  entries: null,
+  entries: [],
 
-  // Holds the currently-viewed entry
-  entryDetail: null
+  // Map slug -> hydration state
+  hydratedEntries: {},
+
+  // Whether the full entry list has been hydrated or not
+  hydratedList: false
 };
 
-export default function entries(state = initialState, action) {
-  if (action.type === FETCH_ENTRY) {
-    return Object.assign({}, state, {
-      entryDetail: action.entry
-    });
+const fetchEntryHandlers = createAsyncActionHandlers(FETCH_ENTRY, (state, data) => {
+  const {slug, entry} = data;
 
-  } else if (action.type === FETCH_ENTRIES_LIST) {
-    return Object.assign({}, state, {
-      entries: action.entries
-    });
+  // Replace entry by slug
+  // TODO: Dis slow.
+  const entries = state.entries.map((storedEntry) => {
+    if (storedEntry.slug === slug) {
+      return entry;
+    }
 
-  } else {
-    return state;
-  }
-}
+    return storedEntry;
+  });
+
+  // Update map of hydrated entries:
+  const hydratedEntries = Object.assign({}, state.hydratedEntries);
+  hydratedEntries[slug] = true;
+
+  return {entries, hydratedEntries};
+});
+
+const fetchListHandlers = createAsyncActionHandlers(FETCH_ENTRIES_LIST, (state, data) => {
+  // Merge existing hydrated entries into entry list
+  const entries = data.entries.map((entry) => {
+    if (state.hydratedEntries[entry.slug]) {
+      return _.find(state.entries, {slug: entry.slug});
+    }
+
+    return entry;
+  });
+
+  return {
+    entries,
+    hydratedList: true
+  };
+});
+
+export default handleActions(Object.assign(
+  fetchEntryHandlers,
+  fetchListHandlers
+), initialState);

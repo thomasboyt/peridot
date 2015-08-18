@@ -6,30 +6,47 @@ import {fetchEntry} from '../actions/entries';
 import {Post} from '../projectRequire';
 
 const Entry = React.createClass({
+  propTypes: {
+    entries: React.PropTypes.array.isRequired,
+    isLoading: React.PropTypes.bool,
+    fetchError: React.PropTypes.object
+  },
+
   componentWillMount() {
-    const {dispatch, entryDetail} = this.props;
+    const {dispatch, hydratedEntries} = this.props;
     const {slug} = this.props.params;
 
-    if (!(entryDetail && entryDetail.slug === slug)) {
+    if (!hydratedEntries[slug]) {
       dispatch(fetchEntry(slug));
     }
   },
 
-  render() {
+  getCurrentEntry() {
+    const {entries} = this.props;
     const {slug} = this.props.params;
-    const {entryDetail} = this.props;
 
-    // TODO: use some sort of loading status here instead
-    const isLoading = !(entryDetail && entryDetail.slug === slug);
+    return entries.filter((entry) => entry.slug === slug)[0];
+  },
+
+  render() {
+    const {isLoading, fetchError} = this.props;
+
+    const entry = this.getCurrentEntry();
 
     return (
-      <Post isLoading={isLoading} entry={entryDetail} />
+      <Post isLoading={isLoading} fetchError={fetchError} entry={entry} />
     );
   }
 });
 
 function getState(state) {
-  return {entryDetail: state.entryDetail};
+  console.log(state);
+  return {
+    entries: state.entries,
+    isLoading: state.fetchEntryPending,
+    fetchError: state.fetchEntryError,
+    hydratedEntries: state.hydratedEntries
+  };
 }
 
 export default connect(getState)(Entry);
