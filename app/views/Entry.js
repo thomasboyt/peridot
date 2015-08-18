@@ -23,7 +23,7 @@ const Entry = React.createClass({
 
   isHydrated() {
     const {slug} = this.props.params;
-    return this.props.hydratedEntries[slug];
+    return !!(this.props.hydratedEntries[slug]);
   },
 
   getCurrentEntry() {
