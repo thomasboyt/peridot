@@ -13,12 +13,17 @@ const Entry = React.createClass({
   },
 
   componentWillMount() {
-    const {dispatch, hydratedEntries} = this.props;
+    const {dispatch} = this.props;
     const {slug} = this.props.params;
 
-    if (!hydratedEntries[slug]) {
+    if (!this.isHydrated()) {
       dispatch(fetchEntry(slug));
     }
+  },
+
+  isHydrated() {
+    const {slug} = this.props.params;
+    return this.props.hydratedEntries[slug];
   },
 
   getCurrentEntry() {
@@ -29,21 +34,21 @@ const Entry = React.createClass({
   },
 
   render() {
-    const {isLoading, fetchError} = this.props;
+    const {fetchError} = this.props;
 
     const entry = this.getCurrentEntry();
 
     return (
-      <Post isLoading={isLoading} fetchError={fetchError} entry={entry} />
+      <Post isHydrated={this.isHydrated()}
+        fetchError={fetchError}
+        entry={entry} />
     );
   }
 });
 
 function getState(state) {
-  console.log(state);
   return {
     entries: state.entries,
-    isLoading: state.fetchEntryPending,
     fetchError: state.fetchEntryError,
     hydratedEntries: state.hydratedEntries
   };

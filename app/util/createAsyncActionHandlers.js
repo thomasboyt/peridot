@@ -5,8 +5,6 @@ export default function createAsyncActionHandlers(name, onSuccess) {
     changes[name + 'Pending'] = true;
     changes[name + 'Error'] = null;
 
-    console.log(name + 'Pending');
-
     return Object.assign({}, state, changes);
   }
 
