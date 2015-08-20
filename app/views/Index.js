@@ -30,7 +30,7 @@ function getState(state) {
     entries: entriesState.entries,
     isLoading: entriesState.fetchEntriesListPending,
     fetchError: entriesState.fetchEntryError,
-    hydratedEntries: entriesState.hydratedEntries
+    hydratedList: entriesState.hydratedList
   };
 }
 
