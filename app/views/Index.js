@@ -24,11 +24,13 @@ const Index = React.createClass({
 });
 
 function getState(state) {
+  const entriesState = state.entries;
+
   return {
-    entries: state.entries,
-    isLoading: state.fetchEntriesListPending,
-    fetchError: state.fetchEntriesListError,
-    hydratedList: state.hydratedList
+    entries: entriesState.entries,
+    isLoading: entriesState.fetchEntriesListPending,
+    fetchError: entriesState.fetchEntryError,
+    hydratedEntries: entriesState.hydratedEntries
   };
 }
 

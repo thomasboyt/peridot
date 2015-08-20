@@ -11,8 +11,10 @@ import routes from './routes';
 const mountPoint = document.getElementById('mount-point');
 
 Router.run(routes, HistoryLocation, (Root, routerState) => {
+  const store = createStore(window.__data__);
+
   React.render((
-    <Provider store={createStore(window.__data__)}>
+    <Provider store={store}>
       {() => <Root routerState={routerState} />}
     </Provider>
   ), mountPoint);

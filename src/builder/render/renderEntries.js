@@ -13,9 +13,11 @@ export default async function renderEntries(entries) {
     hydratedEntries[entry.slug] = true;
 
     const data = {
-      entries: [entry],
-      hydratedEntries: hydratedEntries,
-      hydratedList: false
+      entries: {
+        entries: [entry],
+        hydratedEntries: hydratedEntries,
+        hydratedList: false
+      }
     };
 
     mkdirp(`_site/entries/${entry.slug}`);

@@ -7,8 +7,9 @@
  */
 
 /* global __PROJECT__ */
-const List = require(__PROJECT__ + '/components/layouts/List');
-const Post = require(__PROJECT__ + '/components/layouts/Post');
-const Wrapper = require(__PROJECT__ + '/components/layouts/Wrapper');
+const List = require(__PROJECT__ + '/app/components/layouts/List');
+const Post = require(__PROJECT__ + '/app/components/layouts/Post');
+const Wrapper = require(__PROJECT__ + '/app/components/layouts/Wrapper');
+const reducers = require(__PROJECT__ + '/app/reducers');
 
-export {List, Post, Wrapper};
+export {List, Post, Wrapper, reducers};

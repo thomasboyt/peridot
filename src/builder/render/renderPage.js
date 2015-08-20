@@ -6,7 +6,7 @@ import DocumentTitle from 'react-document-title';
 import renderRoute from './renderRoute';
 
 import requireFromProject from '../../util/requireFromProject';
-const Page = requireFromProject('components/layouts/Page');
+const Page = requireFromProject('app/components/layouts/Page');
 
 export default async function renderPage({data, url, path}) {
   const innerHTML = await renderRoute(url, data);

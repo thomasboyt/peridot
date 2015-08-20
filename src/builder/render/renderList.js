@@ -15,9 +15,11 @@ export default async function renderList(entries) {
   });
 
   const data = {
-    entries: shortEntries,
-    hydratedEntries: {},
-    hydratedList: true
+    entries: {
+      entries: shortEntries,
+      hydratedEntries: {},
+      hydratedList: true
+    }
   };
 
   await renderPage({

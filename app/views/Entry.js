@@ -47,10 +47,12 @@ const Entry = React.createClass({
 });
 
 function getState(state) {
+  const entriesState = state.entries;
+
   return {
-    entries: state.entries,
-    fetchError: state.fetchEntryError,
-    hydratedEntries: state.hydratedEntries
+    entries: entriesState.entries,
+    fetchError: entriesState.fetchEntryError,
+    hydratedEntries: entriesState.hydratedEntries
   };
 }
 

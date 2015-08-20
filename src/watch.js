@@ -49,6 +49,7 @@ async function rebuild() {
   exitLogSection();
 
   log('...Done!');
+  log('');
 
   if (queuedPath) {
     rebuild();
@@ -60,7 +61,7 @@ async function rebuild() {
 export default function watch() {
   chokidar.watch([
     '_entries.yml',
-    'components/',
+    'app/',
     pathJoin(__dirname, '../app')
   ], {
     // ignore dotfiles
