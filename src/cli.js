@@ -17,6 +17,7 @@ app.command('build')
   .option('--skip-webpack', 'don\'t build frontend assets through webpack')
   .option('--skip-pages', 'don\'t build static HTML or JSON')
   .option('--optimize', 'minify Webpack bundle')
+  .option('--log-webpack', 'log Webpack stats to webpack.log.json')
   .action(build);
 
 app.command('serve')

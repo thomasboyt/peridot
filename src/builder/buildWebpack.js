@@ -1,3 +1,4 @@
+import {writeFileSync} from 'fs';
 import webpack from 'webpack';
 import generateWebpackConfig from './generateWebpackConfig';
 import {Promise} from 'es6-promise';
@@ -44,6 +45,10 @@ export default async function buildWebpack(options = {}) {
   }
 
   const jsonStats = stats.toJson();
+
+  if (options.logWebpack) {
+    writeFileSync('./webpack.log.json', JSON.stringify(jsonStats, null, 2), {encoding: 'utf-8'});
+  }
 
   if (jsonStats.errors.length > 0) {
     log('*** Webpack errors:');
