@@ -8,6 +8,9 @@ import {Provider} from 'react-redux';
 import createStore from './store';
 import routes from './routes';
 
+/* global __PROJECT__ */
+require(__PROJECT__ + '/app/frontendEntry');
+
 const mountPoint = document.getElementById('mount-point');
 
 Router.run(routes, HistoryLocation, (Root, routerState) => {
