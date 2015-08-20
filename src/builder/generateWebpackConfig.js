@@ -52,11 +52,7 @@ export default function generateWebpackConfig() {
       new webpack.ProvidePlugin({
         'React': 'react',
         'DocumentTitle': 'react-document-title'
-      }),
-
-      // TODO: Move this to project-specific config after
-      // https://github.com/thomasboyt/nite-flights/issues/18
-      new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+      })
     ],
 
     devtool: 'source-map',
