@@ -1,16 +1,23 @@
 import webpack from 'webpack';
+import merge from 'webpack-merge';
 import path from 'path';
+import requireFromProject from '../util/requireFromProject';
 
 export default function generateWebpackConfig() {
   const root = path.join(__dirname, '../..');
 
-  return {
+  const customConfig = requireFromProject('./webpack.config.js');
+
+  const defaultConfig = {
     resolve: {
       root: path.join(root, 'node_modules/')
     },
 
     resolveLoader: {
-      modulesDirectories: [path.join(root, 'node_modules/')]
+      modulesDirectories: [
+        path.join(root, 'node_modules/'),
+        path.join(process.cwd(), 'node_modules/')
+      ]
     },
 
     entry: {
@@ -21,7 +28,7 @@ export default function generateWebpackConfig() {
     },
 
     output: {
-      path: '_site/js/',
+      path: '_site/assets/',
       filename: '[name].bundle.js'
     },
 
@@ -56,4 +63,6 @@ export default function generateWebpackConfig() {
       ]
     }
   };
+
+  return merge(defaultConfig, customConfig);
 }
