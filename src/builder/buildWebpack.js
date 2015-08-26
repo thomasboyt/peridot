@@ -9,13 +9,7 @@ let compiler;
 function runWebpack(optimize = false) {
   // Lazily instantiate the compiler on first run
   if (!compiler) {
-    const config = generateWebpackConfig();
-
-    if (optimize) {
-      config.plugins.push(new webpack.optimize.UglifyJsPlugin());
-      config.devtool = null;
-    }
-
+    const config = generateWebpackConfig(optimize);
     compiler = webpack(config);
   }
 

@@ -3,12 +3,12 @@ import merge from 'webpack-merge';
 import path from 'path';
 import requireFromProject from '../util/requireFromProject';
 
-export default function generateWebpackConfig() {
+export default function generateWebpackConfig(optimize) {
   const root = path.join(__dirname, '../..');
 
-  const customConfig = requireFromProject('./webpack.config.js');
+  const customConfig = requireFromProject('./webpack.config.js')(optimize);
 
-  const defaultConfig = {
+  let defaultConfig = {
     resolve: {
       root: path.join(root, 'node_modules/')
     },
@@ -70,6 +70,15 @@ export default function generateWebpackConfig() {
       ]
     }
   };
+
+  if (optimize) {
+    defaultConfig = merge(defaultConfig, {
+      plugins: [
+        new webpack.optimize.UglifyJsPlugin()
+      ],
+      devtool: null
+    });
+  }
 
   return merge(defaultConfig, customConfig);
 }
