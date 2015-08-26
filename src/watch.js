@@ -62,6 +62,7 @@ export default function watch() {
   chokidar.watch([
     '_entries.yml',
     'app/',
+    'styles/',
     pathJoin(__dirname, '../app')
   ], {
     // ignore dotfiles
