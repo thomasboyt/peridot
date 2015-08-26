@@ -1,6 +1,7 @@
 import fetch from 'node-fetch';
 
 import getToken from './getToken';
+import serializeTweet from './serializeTweet';
 
 import {log} from '../util/logger';
 
@@ -22,7 +23,9 @@ export default async function fetchTweets(ids) {
       throw resp;
     }
 
-    return await resp.json();
+    const tweets = await resp.json();
+
+    return tweets.map(serializeTweet);
 
   } catch(err) {
     log('error fetching tweets');
