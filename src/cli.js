@@ -6,9 +6,6 @@ mkdirpSync('_site/entries');
 import app from 'commander';
 const pkg = require('../package.json');
 
-import build from './builder';
-import serve from './server';
-
 app
   .version(pkg.version);
 
@@ -18,11 +15,17 @@ app.command('build')
   .option('--skip-pages', 'don\'t build static HTML or JSON')
   .option('--optimize', 'minify Webpack bundle')
   .option('--log-webpack', 'log Webpack stats to webpack.log.json')
-  .action(build);
+  .action((...args) => {
+    const build = require('./builder');
+    build(...args);
+  });
 
 app.command('serve')
   .description('Build and serve files')
-  .action(serve);
+  .action((...args) => {
+    const serve = require('./server');
+    serve(...args);
+  });
 
 app.parse(process.argv);
 
