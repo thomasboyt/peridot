@@ -27,6 +27,7 @@
     "react-document-title": "^1.0.3",
     "react-redux": "^0.8.2",
     "react-router": "^0.13.3",
+    "recursive-readdir": "^1.2.1",
     "redux": "^1.0.1",
     "redux-actions": "^0.7.0",
     "redux-promise-middleware": "^0.2.1",
