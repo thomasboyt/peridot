@@ -6,7 +6,8 @@
 const Page = React.createClass({
 
   propTypes: {
-    // The initial title of the page. Later updated with <DocumentTitle /> components.
+    // The initial title of the page. This is computed from <DocumentTitle /> components inside
+    // your routes.
     pageTitle: React.PropTypes.string.isRequired,
 
     // The contents of the page, and the mount point for the client-side app.

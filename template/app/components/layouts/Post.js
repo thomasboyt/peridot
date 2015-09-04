@@ -32,7 +32,7 @@ const Post = React.createClass({
     const {title} = this.props.post;
 
     return (
-      <DocumentTitle title={getPageTitle(title)}>
+      <DocumentTitle title={title}>
         <div>
           <h1 className="title">
             {title}

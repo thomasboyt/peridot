@@ -37,7 +37,7 @@ const List = React.createClass({
     const {isLoading} = this.props;
 
     return (
-      <DocumentTitle title={getPageTitle('Home')}>
+      <DocumentTitle title="Home">
         <div className="home">
           {!isLoading ? this.renderPosts() : <Loading />}
         </div>
