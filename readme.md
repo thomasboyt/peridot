@@ -4,7 +4,9 @@ Nite Flights is an isomorphic static site generator powered by Node and React. I
 
 Instead of traditional template-based static site generators like Jekyll, nite-flights sites are built with React components, which allow you to easily build full-featured sites, instead of being limited to various plugins and template filters. These components are rendered by the Nite Flights build tool, creating static pages, as well as a bundle of client-side JS that will take over after the initial page render. This allows you to build powerful single-page user-experiences while retaining the advantages of server-rendered applications (such as fast load times and SEO).
 
-For an example site built with this tool, see [the source for loudplaces.disco.zone](https://github.com/thomasboyt/loudplaces.disco.zone).
+## Example
+
+This generator powers [loudplaces.disco.zone](http://loudplace.disco.zone). That site's source is [available on my GitHub](https://github.com/thomasboyt/loudplaces.disco.zone).
 
 ## Installation
 
