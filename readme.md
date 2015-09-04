@@ -38,6 +38,20 @@ Serve your site at `localhost:3000`. This will automatically rebuild your client
 
 ### Custom Assets With Webpack
 
+### Common Tasks
+
+#### Rendering Markdown with `<Remarkable />`
+
+Remarkable is a JavaScript library for rendering Markdown. A [React wrapper](https://github.com/acdlite/react-remarkable) for it is available.
+
+You can apply it to your post's body text to render Markdown posts:
+
+```js
+<Remarkable>
+  {this.props.post.body}
+</Remarkable>
+```
+
 ## Using Media
 
 While you can use any form of media you want in your client-side application, Nite Flights has special tools for caching and hosting certain media. For example, Tweets can be cached and saved as part of your blog's data, which allows you to render them how you want on the client and server without any dependency on Twitter's JavaScript APIs.
