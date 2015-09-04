@@ -1,0 +1,18 @@
+{
+  "name": "my-blog",
+  "private": true,
+
+  "dependencies": {
+    "react": "^0.13.3",
+    "react-router": "^0.13.3",
+    "react-redux": "^0.9.0",
+    "redux": "^1.0.1"
+  },
+
+  "devDependencies": {
+    "nite-flights": "git://github.com/thomasboyt/nite-flights",
+    "css-loader": "^0.16.0",
+    "style-loader": "^0.12.3",
+    "webpack": "^1.11.0"
+  }
+}
