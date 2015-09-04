@@ -20,7 +20,7 @@ async function errorWrap(cb, ...args) {
       console.log(err);
     }
 
-    process.exit();
+    process.exit(1);
   }
 }
 
