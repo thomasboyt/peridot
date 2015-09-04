@@ -2,13 +2,13 @@ import {readFileSync} from 'fs';
 import yaml from 'js-yaml';
 import fetch from 'node-fetch';
 
-const privateYaml = readFileSync('_private.yml', {encoding: 'utf8'});
-const privateSettings = yaml.safeLoad(privateYaml);
-
-const apiKey = privateSettings['twitter_api_key'];
-const apiSecret = privateSettings['twitter_api_secret'];
-
 export default async function getToken() {
+  const privateYaml = readFileSync('_private.yml', {encoding: 'utf8'});
+  const privateSettings = yaml.safeLoad(privateYaml);
+
+  const apiKey = privateSettings['twitter_api_key'];
+  const apiSecret = privateSettings['twitter_api_secret'];
+
   const encodedKeySecret = encodeURIComponent(apiKey) + ':' + encodeURIComponent(apiSecret);
   const b64KeySecret = new Buffer(encodedKeySecret).toString('base64');
 
