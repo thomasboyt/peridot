@@ -37,9 +37,9 @@ app.command('new <path>')
 
 app.command('build')
   .description('Build files to _site/')
+  .option('--optimize', 'minify Webpack bundle')
   .option('--skip-webpack', 'don\'t build frontend assets through webpack')
   .option('--skip-pages', 'don\'t build static HTML or JSON')
-  .option('--optimize', 'minify Webpack bundle')
   .option('--log-webpack', 'log Webpack stats to webpack.log.json')
   .action((...args) => {
     const build = require('./builder');
