@@ -8,7 +8,7 @@ import Index from './views/Index';
 const routes = (
   <Route handler={App}>
     <DefaultRoute name="index" handler={Index} />
-    <Route name="entry" path="entries/:slug/" handler={Entry} />
+    <Route name="post" path="entries/:slug/" handler={Entry} />
   </Route>
 );
 

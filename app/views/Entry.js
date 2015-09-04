@@ -41,7 +41,7 @@ const Entry = React.createClass({
     return (
       <Post isHydrated={this.isHydrated()}
         fetchError={fetchError}
-        entry={entry} />
+        post={entry} />
     );
   }
 });

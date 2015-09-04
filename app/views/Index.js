@@ -18,7 +18,7 @@ const Index = React.createClass({
     const {entries, isLoading, fetchError} = this.props;
 
     return (
-      <List isLoading={!!isLoading} fetchError={fetchError} entries={entries} />
+      <List isLoading={!!isLoading} fetchError={fetchError} posts={entries} />
     );
   }
 });
