@@ -6,7 +6,7 @@ Instead of traditional template-based static site generators like Jekyll, nite-f
 
 ## Example
 
-This generator powers [loudplaces.disco.zone](http://loudplace.disco.zone). That site's source is [available on my GitHub](https://github.com/thomasboyt/loudplaces.disco.zone).
+This generator powers [loudplaces.disco.zone](http://loudplaces.disco.zone). That site's source is [available on my GitHub](https://github.com/thomasboyt/loudplaces.disco.zone).
 
 ## Installation
 
