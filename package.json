@@ -1,8 +1,9 @@
 {
   "name": "nite-flights",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "A static social media scrapbook generator powered by React.",
   "main": "bin/nite-flights",
+  "repository": "thomasboyt/nite-flights",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
