@@ -11,3 +11,31 @@ For an example site built with this tool, see [the source for loudplaces.disco.z
 ```
 npm install -g nite-flights
 ```
+
+## CLI Usage
+
+### `nite-flights new <path>`
+
+Generate a new blog at `<path>`.
+
+### `nite-flights build [--optimize]`
+
+Build your blog to `_site/`. Optionally minify your client-side app bundle by passing `--optimize`.
+
+### `nite-flights serve`
+
+Serve your site at `localhost:3000`. This will automatically rebuild your client-side bundle and rendered pages when you change files in your project.
+
+## Developing Your Site
+
+*(this whole section is obviously a to-do at the moment. The [source for loudplaces.disco.zone](https://github.com/thomasboyt/loudplaces.disco.zone) may be a useful resource if you want to experiment with Nite Flights)*
+
+### _entries.yml
+
+### Customizing Components
+
+### Custom Assets With Webpack
+
+## Using Media
+
+## Tweets
