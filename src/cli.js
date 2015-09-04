@@ -1,8 +1,3 @@
-import {sync as mkdirpSync} from 'mkdirp';
-mkdirpSync('_cache');
-mkdirpSync('_site/entries');
-
-
 import app from 'commander';
 const pkg = require('../package.json');
 

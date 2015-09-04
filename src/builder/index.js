@@ -1,7 +1,17 @@
+import {sync as mkdirpSync} from 'mkdirp';
+
 import buildPages from './buildPages';
 import buildWebpack from './buildWebpack';
 
+// TODO: not sure this is the best place for this
+function ensureBuildFoldersExist() {
+  mkdirpSync('_cache');
+  mkdirpSync('_site/entries');
+}
+
 export default async function(options) {
+  ensureBuildFoldersExist();
+
   options = options || {};
 
   const builders = [];
