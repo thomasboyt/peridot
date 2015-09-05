@@ -25,6 +25,7 @@ export default function generateWebpackConfig(optimize) {
     entry: {
       app: path.join(root, './app/entry.js'),
       vendor: [
+        'babel-runtime/regenerator',
         'react',
         'react-router',
         'react-redux',
