@@ -1,9 +1,13 @@
 import {flatten} from 'lodash';
 import slug from 'slug';
+import Remarkable from 'remarkable';
+
 import getTweets from './getTweets';
 
 // Transform tweet lists from URLs to IDs
 const TWEET_ID_RE = /https:\/\/twitter.com\/.+\/status\/([0-9]+)/;
+
+const md = new Remarkable();
 
 function loadEntry(entry) {
   // TODO: this actually just mutates the passed entry, should probably clone...
@@ -24,6 +28,13 @@ function loadEntry(entry) {
   entry.tweets = entry.tweets.map((url) => {
     return url.match(TWEET_ID_RE)[1];
   });
+
+  // Compile Markdown
+  // TODO: Add setting for this?
+  // TODO: Allow customizing Remarkable settings/use custom renderer
+  if (entry.body) {
+    entry.body = md.render(entry.body);
+  }
 
   return entry;
 }
