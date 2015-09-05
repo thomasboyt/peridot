@@ -13,9 +13,9 @@ require(__PROJECT__ + '/app/frontendEntry');
 
 const mountPoint = document.getElementById('mount-point');
 
-Router.run(routes, HistoryLocation, (Root, routerState) => {
-  const store = createStore(window.__data__);
+const store = createStore(window.__data__);
 
+Router.run(routes, HistoryLocation, (Root, routerState) => {
   React.render((
     <Provider store={store}>
       {() => <Root routerState={routerState} />}
