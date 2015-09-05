@@ -1,3 +1,5 @@
+import React from 'react';
+
 /*
  * The outer wrapper for a page. Only used for server-side rendering; the client-side mount point
  * is a child of this component.
