@@ -25,7 +25,7 @@ const Post = React.createClass({
   renderHydrated() {
     return (
       <div>
-        {this.props.body}
+        {this.props.post.body}
       </div>
     );
   },
