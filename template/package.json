@@ -3,7 +3,6 @@
   "private": true,
 
   "dependencies": {
-    "react": "^0.13.3",
     "react-router": "^0.13.3",
     "react-redux": "^0.9.0",
     "redux": "^1.0.1"
