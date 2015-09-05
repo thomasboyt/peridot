@@ -37,9 +37,9 @@ const Post = React.createClass({
     return (
       <DocumentTitle title={title}>
         <div>
-          <h1 className="title">
+          <h2>
             {title}
-          </h1>
+          </h2>
 
           {isHydrated ? this.renderHydrated() : <Loading />}
         </div>

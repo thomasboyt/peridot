@@ -15,7 +15,7 @@ const Wrapper = React.createClass({
     return (
       <div className="container">
         <header>
-          <h1 className="blog-title">
+          <h1>
             <Link to="index">My Blog</Link>
           </h1>
         </header>

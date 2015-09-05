@@ -1,3 +1,4 @@
-body {
-  color: red;
-}
+@import './writ.css';
+
+/* writ applies this to `body > header`, but we have a container div */
+header { text-align: center; }
