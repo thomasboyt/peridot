@@ -8,6 +8,8 @@ export default function generateWebpackConfig(optimize) {
 
   const customConfig = requireFromProject('./webpack.config.js')(optimize);
 
+  const nodeEnv = optimize ? 'production' : 'development';
+
   let defaultConfig = {
     resolve: {
       root: path.join(root, 'node_modules/')
@@ -42,17 +44,14 @@ export default function generateWebpackConfig(optimize) {
     plugins: [
       new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js'),
 
-      // See app/projectRequire.js
       new webpack.DefinePlugin({
-        __PROJECT__: JSON.stringify(process.cwd())
-      }),
+        // See app/projectRequire.js
+        __PROJECT__: JSON.stringify(process.cwd()),
 
-      // Globalize singleton deps
-      // See src/injectGlobals.js
-      new webpack.ProvidePlugin({
-        'React': 'react',
-        'DocumentTitle': 'react-document-title'
-      })
+        'process.env': {
+          NODE_ENV: JSON.stringify(nodeEnv)
+        }
+      }),
     ],
 
     devtool: 'source-map',
