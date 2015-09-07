@@ -5,7 +5,8 @@ import buildWebpack from './buildWebpack';
 
 // TODO: not sure this is the best place for this
 function ensureBuildFoldersExist() {
-  mkdirpSync('_cache');
+  mkdirpSync('_cache/tweets');
+
   mkdirpSync('_site/entries');
 }
 

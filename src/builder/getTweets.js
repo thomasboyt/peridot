@@ -2,7 +2,7 @@ import {readFileSync, writeFileSync} from 'fs';
 import fetchTweets from '../twitter/fetchTweets';
 
 function getCachePath(id) {
-  return `./_cache/${id}.json`;
+  return `./_cache/tweets/${id}.json`;
 }
 
 function getCache(id) {
