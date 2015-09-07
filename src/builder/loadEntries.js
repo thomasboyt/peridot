@@ -3,6 +3,7 @@ import slug from 'slug';
 import Remarkable from 'remarkable';
 
 import getTweets from './getTweets';
+import getMedia from '../media/getMedia';
 
 // Transform tweet lists from URLs to IDs
 const TWEET_ID_RE = /https:\/\/twitter.com\/.+\/status\/([0-9]+)/;
@@ -23,11 +24,14 @@ function loadEntry(entry) {
   if (!entry.tweets) {
     entry.tweets = [];
   }
+  if (!entry.audio) {
+    entry.audio = [];
+  }
 
   // Transform tweet URLs to tweet IDs
-  entry.tweets = entry.tweets.map((url) => {
-    return url.match(TWEET_ID_RE)[1];
-  });
+  // entry.tweets = entry.tweets.map((url) => {
+  //   return url.match(TWEET_ID_RE)[1];
+  // });
 
   // Compile Markdown
   // TODO: Add setting for this?
@@ -42,18 +46,30 @@ function loadEntry(entry) {
 export default async function loadEntries(entryData) {
   const entries = entryData.map(loadEntry);
 
-  // Concat all tweet IDs into single list to fetch from server
-  const tweetIds = flatten(entries.map((entry) => entry.tweets));
+  // Concat all tweet into single list
+  const tweetUrls = flatten(entries.map((entry) => entry.tweets));
 
-  const tweets = await getTweets(tweetIds);
+  // Concat all audio into single list
+  const audioUrls = flatten(entries.map((entry) => entry.audio));
+
+  const tweets = await getMedia(tweetUrls);
+  const audio = await getMedia(audioUrls);
 
   entries.forEach((entry) => {
-    entry.tweets = entry.tweets.map((tweetId) => {
-      if (!tweets[tweetId]) {
-        throw new Error(`Missing tweet ${tweetId}`);
+    entry.tweets = entry.tweets.map((url) => {
+      if (!tweets[url]) {
+        throw new Error(`Missing tweet ${url}`);
       }
 
-      return tweets[tweetId];
+      return tweets[url];
+    });
+
+    entry.audio = entry.audio((url) => {
+      if (!audio[url]) {
+        throw new Error(`Missing audio ${url}`);
+      }
+
+      return audio[url];
     });
   });
 
