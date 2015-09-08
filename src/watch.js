@@ -33,7 +33,7 @@ async function rebuild() {
   // spawn rebuild so it uses new components/
   // TODO: reject on non-zero code to display an error message warning of some sort
   const buildPagesPromise = new Promise((resolve/*, reject*/) => {
-    const proc = spawn(binPath, ['build', '--skip-webpack'], {
+    const proc = spawn(binPath, ['build', '--skip-webpack', '--skip-copy'], {
       stdio: ['pipe', 'pipe', 'pipe']
     });
 

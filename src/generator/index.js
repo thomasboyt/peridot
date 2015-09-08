@@ -1,5 +1,6 @@
 import path from 'path';
-import {statSync, readFileSync, writeFileSync} from 'fs';
+import {readFileSync, writeFileSync} from 'fs';
+import exists from '../util/exists';
 import {sync as mkdirpSync} from 'mkdirp';
 
 import {Promise} from 'es6-promise';
@@ -17,19 +18,6 @@ function getTemplateFiles() {
       }
     });
   });
-}
-
-function exists(path) {
-  try {
-    statSync(path)
-    return true;
-  } catch(err) {
-    if (err.code === 'ENOENT') {
-      return false;
-    }
-
-    throw err;
-  }
 }
 
 export default async function(outPath, options) {
