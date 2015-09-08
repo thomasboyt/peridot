@@ -2,9 +2,9 @@ import {join as pathJoin} from 'path';
 import {spawn} from 'child_process';
 import chokidar from 'chokidar';
 
-import buildWebpack from './builder/buildWebpack';
+import buildWebpack from '../builder/buildWebpack';
 
-import {log, enterLogSection, exitLogSection, createProcessLogger} from './util/logger';
+import {log, enterLogSection, exitLogSection, createProcessLogger} from '../util/logger';
 
 const binPath = pathJoin(__dirname, '../bin/nite-flights');
 

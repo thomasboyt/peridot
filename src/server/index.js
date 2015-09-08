@@ -1,7 +1,7 @@
 import express from 'express';
-import {log} from './util/logger';
+import {log} from '../util/logger';
 
-import build from './builder';
+import build from '../builder';
 import watch from './watch';
 
 export default async function serve() {
