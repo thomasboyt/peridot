@@ -30,7 +30,7 @@ Serve your site at `localhost:3000`. This will automatically rebuild your client
 
 ## Developing Your Site
 
-*(this whole section is obviously a to-do at the moment. The [source for loudplaces.disco.zone](https://github.com/thomasboyt/loudplaces.disco.zone) may be a useful resource if you want to experiment with Peridot
+*(this whole section is obviously a to-do at the moment. The [source for loudplaces.disco.zone](https://github.com/thomasboyt/loudplaces.disco.zone) may be a useful resource if you want to experiment with Peridot)*
 
 ### _entries.yml
 
