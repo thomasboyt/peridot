@@ -6,7 +6,7 @@
   },
 
   "devDependencies": {
-    "nite-flights": "git://github.com/thomasboyt/nite-flights",
+    "peridot": "git://github.com/thomasboyt/peridot",
     "css-loader": "^0.16.0",
     "style-loader": "^0.12.3",
     "webpack": "^1.11.0"

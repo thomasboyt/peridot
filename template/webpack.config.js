@@ -1,5 +1,5 @@
 /*
- * Custom webpack config that gets merged into default nite-flights config
+ * Custom webpack config that gets merged into default Peridot config
  */
 
 import webpack from 'webpack';

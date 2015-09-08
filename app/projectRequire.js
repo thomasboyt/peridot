@@ -1,7 +1,7 @@
 /*
  * For __PROJECT__ source, see:
- *   Node: bin/nite-flights
- *   Webpack: generateWebpackConfig
+ *   Node: src/injectGlobals
+ *   Webpack: src/builder/generateWebpackConfig
  *
  * Thanks sokra: https://gist.github.com/thomasboyt/736713bc677124e57936#gistcomment-1551872
  */
