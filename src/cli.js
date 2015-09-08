@@ -40,6 +40,7 @@ app.command('build')
   .option('--optimize', 'minify Webpack bundle')
   .option('--skip-webpack', 'don\'t build frontend assets through webpack')
   .option('--skip-pages', 'don\'t build static HTML or JSON')
+  .option('--skip-copy', 'don\'t copy static files to _site/')
   .option('--log-webpack', 'log Webpack stats to webpack.log.json')
   .action((...args) => {
     const build = require('./builder');

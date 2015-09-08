@@ -18,6 +18,7 @@
     "babel-runtime": "^5.8.20",
     "chokidar": "^1.0.5",
     "commander": "^2.8.1",
+    "cpr": "^0.4.1",
     "es6-promise": "^3.0.2",
     "express": "^4.13.3",
     "js-yaml": "^3.3.1",

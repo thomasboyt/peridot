@@ -2,6 +2,7 @@ import {sync as mkdirpSync} from 'mkdirp';
 
 import buildPages from './buildPages';
 import buildWebpack from './buildWebpack';
+import buildCopy from './buildCopy';
 
 // TODO: not sure this is the best place for this
 function ensureBuildFoldersExist() {
@@ -19,12 +20,16 @@ export default async function(options) {
   const builders = [];
 
   if (!options.skipPages) {
-    builders.push(buildPages());
+    builders.push(buildPages);
+  }
+
+  if (!options.skipCopy) {
+    builders.push(buildCopy);
   }
 
   if (!options.skipWebpack) {
-    builders.push(buildWebpack(options));
+    builders.push(buildWebpack);
   }
 
-  await* builders;
+  await* builders.map((builder) => builder(options));
 }
