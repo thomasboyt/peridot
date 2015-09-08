@@ -1,28 +1,7 @@
 import app from 'commander';
 const pkg = require('../package.json');
 
-/*
- * Top-level error handler for async functions.
- *
- * Various subcommands have custom error handlers for prettier errors & preventing exit
- */
-async function errorWrap(cb, ...args) {
-  /* eslint no-process-exit: 0 */
-
-  try {
-    await cb(...args);
-  } catch(err) {
-    if (err.stack) {
-      // JS errors
-      console.log(err.stack);
-    } else {
-      // Other error
-      console.log(err);
-    }
-
-    process.exit(1);
-  }
-}
+import errorWrap from './util/errorWrap';
 
 app
   .version(pkg.version);
