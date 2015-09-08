@@ -2,7 +2,7 @@ import _ from 'lodash';
 import slug from 'slug';
 import Remarkable from 'remarkable';
 
-import getMedia from '../media/getMedia';
+import getMedia from './media/getMedia';
 
 const md = new Remarkable();
 

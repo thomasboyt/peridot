@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import Entry from './Entry';
-import fetchMediaQueue from '../media/fetchMediaQueue';
+import fetchMediaQueue from './media/fetchMediaQueue';
 
 export default async function loadEntries(entryData) {
   // Create Entry models

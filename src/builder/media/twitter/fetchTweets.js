@@ -3,7 +3,7 @@ import fetch from 'node-fetch';
 
 import getToken from './getToken';
 
-import {log} from '../../util/logger';
+import {log} from '../../../util/logger';
 
 /*
  * Given a list of Tweet objects, fetches data for each tweet and calls
