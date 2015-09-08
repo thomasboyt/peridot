@@ -5,7 +5,9 @@ import build from './builder';
 import watch from './watch';
 
 export default async function serve() {
-  await build();
+  await build({
+    skipCopy: true
+  });
 
   const app = express();
 
