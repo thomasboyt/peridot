@@ -12,7 +12,7 @@ function ensureBuildFoldersExist() {
   mkdirpSync('_site/entries');
 }
 
-export default async function(options) {
+export default async function build(options) {
   ensureBuildFoldersExist();
 
   options = options || {};
