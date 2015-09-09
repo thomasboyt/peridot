@@ -1,0 +1,9 @@
+photos:
+  dir: 'photos/'
+  sizes:
+    large:
+      w: 1024
+      h: 1024
+    small:
+      w: 400
+      h: 400
