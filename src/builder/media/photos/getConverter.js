@@ -9,6 +9,7 @@ export default function getConverter() {
 
   try {
     execSync('gm version', {stdio: [null, null, null]});
+    converter = gm;
     return converter;
 
   } catch(err) {
