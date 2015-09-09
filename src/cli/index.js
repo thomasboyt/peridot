@@ -1,7 +1,8 @@
 import app from 'commander';
-const pkg = require('../package.json');
 
-import errorWrap from './util/errorWrap';
+import errorWrap from '../util/errorWrap';
+
+const pkg = require('../../package.json');
 
 app
   .version(pkg.version);

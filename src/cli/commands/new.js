@@ -5,9 +5,9 @@ import {sync as mkdirpSync} from 'mkdirp';
 import {Promise} from 'es6-promise';
 import recursive from 'recursive-readdir';
 
-import exists from '../util/exists';
+import exists from '../../util/exists';
 
-const templateDir = path.join(__dirname, '../../template');
+const templateDir = path.join(__dirname, '../../../template');
 
 function getTemplateFiles() {
   return new Promise((resolve, reject) => {
