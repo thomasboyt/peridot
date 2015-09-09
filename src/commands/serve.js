@@ -3,7 +3,7 @@ import express from 'express';
 import build from './build';
 import watch from '../watch';
 
-export default async function serve(options) {
+export default async function serve() {
   await build({
     skipCopy: true
   });
@@ -14,7 +14,7 @@ export default async function serve(options) {
   app.use(express.static('public/'));
   app.use('/assets/photos', express.static('_cache/photos/'));
 
-  const server = app.listen(options.port, () => {
+  const server = app.listen(3000, function () {
     const host = server.address().address;
     const port = server.address().port;
 
