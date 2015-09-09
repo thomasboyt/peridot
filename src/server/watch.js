@@ -6,7 +6,7 @@ import buildWebpack from '../builder/buildWebpack';
 
 import {log, enterLogSection, exitLogSection, createProcessLogger} from '../util/logger';
 
-const binPath = pathJoin(__dirname, '../bin/peridot');
+const binPath = pathJoin(__dirname, '../../bin/peridot');
 
 // hmmmm
 let queuedPath = null;
