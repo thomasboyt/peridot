@@ -1,4 +1,7 @@
+import _ from 'lodash';
+
 import logUpdate from 'log-update';
+import chalk from 'chalk';
 
 export default class BuilderManager {
   constructor(options) {
@@ -23,10 +26,11 @@ export default class BuilderManager {
 
   renderBuilderProgress(builder) {
     let progress = '';
+
     if (builder.done) {
-      progress += 'Done!';
+      progress = chalk.green('Done!');
     } else if (builder.didError) {
-      progress += 'ERROR';
+      progress = chalk.bold.red('Error');
     }
 
     if (builder.time !== null) {
@@ -39,7 +43,8 @@ export default class BuilderManager {
   renderProgress() {
     const lines = this.builders.map((builder) => {
       const progress = this.renderBuilderProgress(builder);
-      return `${builder.description}... ${progress}`;
+
+      return `${_.padLeft(_.capitalize(builder.description), 30)}... ${progress}`;
     }).join('\n');
 
     logUpdate(lines);

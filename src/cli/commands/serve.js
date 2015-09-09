@@ -18,7 +18,7 @@ export default async function serve() {
     const host = server.address().address;
     const port = server.address().port;
 
-    console.log(`Listening at http://${host}:${port}`);
+    console.log(`Listening at http://${host}:${port}\n`);
   });
 
   watch();
