@@ -12,8 +12,8 @@ export default class Photo extends Media {
     const imgInfo = await getPhoto(this.meta.photo);
 
     this.data = {
-      url: imgInfo.url,
-      caption: this.meta.caption
+      caption: this.meta.caption,
+      ...imgInfo
     };
   }
 }

@@ -2,7 +2,7 @@
  * Adapted from https://github.com/patrick-steele-idem/app-module-path-node
  *
  * This ludicrous monkey-patch allows project-local modules to import dependencies from
- * Peridot.
+ * Peridot's node_modules/ folder.
  *
  * This ensures everything uses the same dependencies for React (required for various context
  * things), react-document-title (required for `DocumentTitle.rewind()` to work in page building),
