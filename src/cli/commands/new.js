@@ -1,9 +1,12 @@
 import path from 'path';
 import {readFileSync, writeFileSync} from 'fs';
 import {sync as mkdirpSync} from 'mkdirp';
+import {execSync} from 'child_process';
 
 import {Promise} from 'es6-promise';
 import recursive from 'recursive-readdir';
+import inquirer from 'inquirer';
+import {copySync} from 'fs-extra';
 
 import exists from '../../util/exists';
 
@@ -18,6 +21,12 @@ function getTemplateFiles() {
         resolve(files);
       }
     });
+  });
+}
+
+function showPrompt(...args) {
+  return new Promise((resolve) => {
+    inquirer.prompt(...args, (answers) => resolve(answers));
   });
 }
 
@@ -56,6 +65,23 @@ export default async function(outPath, options) {
     writeFileSync(fileOutPath, content, {encoding: 'utf-8'});
   });
 
-  // TODO: Run NPM install
-  // TODO: copy _private.example.yml to _private.yml
+  const fullPath = path.resolve(outPath);
+
+  copySync(path.join(fullPath, '_private.example.yml'), path.join(fullPath, '_private.yml'));
+
+  console.log(`Created new Peridot project in ${fullPath}.`);
+
+  const {shouldNPMInstall} = await showPrompt([{
+    type: 'confirm',
+    name: 'shouldNPMInstall',
+    message: 'Run npm install?',
+    default: true
+  }]);
+
+  if (shouldNPMInstall) {
+    execSync('npm install', {
+      cwd: fullPath,
+      stdio: 'inherit'
+    });
+  }
 }
