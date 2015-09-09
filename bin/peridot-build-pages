@@ -1,0 +1,10 @@
+#!/usr/bin/env node
+
+require('babel/register')({
+  optional: ['es7.asyncFunctions']
+});
+
+require('../src/pagesBuilder/monkeyPatchModuleLoading');
+require('../src/pagesBuilder/injectGlobals');
+
+require('../src/pagesBuilder/main');

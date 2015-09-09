@@ -1,18 +1,8 @@
-import {sync as mkdirpSync} from 'mkdirp';
-
 import PagesBuilder from './PagesBuilder';
 import WebpackBuilder from './WebpackBuilder';
 import CopyBuilder from './CopyBuilder';
 
 import logUpdate from 'log-update';
-
-// TODO: not sure this is the best place for this
-function ensureBuildFoldersExist() {
-  mkdirpSync('_cache/tweets');
-  mkdirpSync('_cache/photos');
-
-  mkdirpSync('_site/entries');
-}
 
 class BuilderManager {
   constructor(options) {
@@ -66,11 +56,7 @@ class BuilderManager {
   }
 }
 
-export default async function build(options) {
-  ensureBuildFoldersExist();
-
-  options = options || {};
-
+export default async function build(options = {}) {
   const manager = new BuilderManager(options);
 
   if (!options.skipPages) {
