@@ -1,7 +1,6 @@
-import {readFileSync, writeFileSync} from 'fs';
-
 import Media from '../Media';
 import serializeTweet from './serializeTweet';
+import {getTweet, addTweet} from './tweetCache';
 
 const TWEET_ID_RE = /https:\/\/twitter.com\/.+\/status\/([0-9]+)/;
 
@@ -18,29 +17,11 @@ export default class Tweet extends Media {
   }
 
   async hydrate() {
-    this.data = this._loadTweetFromCache();
+    this.data = getTweet(this.id);
   }
 
   didFetch(data) {
     this.data = serializeTweet(data);
-    this._cacheTweet();
+    addTweet(this.data);
   }
-
-  _loadTweetFromCache() {
-    try {
-      return JSON.parse(readFileSync(this._getCachePath(), {encoding: 'utf8'}));
-    } catch(err) {
-      return undefined;
-    }
-  }
-
-  _cacheTweet() {
-    const str = JSON.stringify(this.data);
-    writeFileSync(this._getCachePath(), str, {encoding: 'utf8'});
-  }
-
-  _getCachePath() {
-    return `./_cache/tweets/${this.id}.json`;
-  }
-
 }

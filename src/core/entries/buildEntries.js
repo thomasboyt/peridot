@@ -5,7 +5,7 @@ import {sync as mkdirpSync} from 'mkdirp';
 
 import Entry from './Entry';
 import fetchMediaQueue from './media/fetchMediaQueue';
-
+import {loadTweetCache, saveTweetCache} from './media/twitter/tweetCache';
 
 function ensureCacheFoldersExist() {
   mkdirpSync('_cache/photos');
@@ -13,6 +13,9 @@ function ensureCacheFoldersExist() {
 
 export default async function buildEntries() {
   ensureCacheFoldersExist();
+
+  loadTweetCache();
+  //loadPhotosCache();
 
   const entriesYaml = readFileSync('_entries.yml', {encoding: 'utf8'});
 
@@ -29,6 +32,9 @@ export default async function buildEntries() {
   // Hydrate queued (batched) media
   const mediaQueue = _.flatten(entries.map((entry) => entry.getMediaQueue()));
   await fetchMediaQueue(mediaQueue);
+
+  saveTweetCache();
+  //savePhotosCache();
 
   const serialized = entries.map((entry) => entry.serialize());
 
