@@ -1,9 +1,17 @@
 photos:
+  # The directory your photos are in. Relative to the current project
+  # directory, unless it's an absolute path.
   dir: 'photos/'
+
+  # Define sizes to resize images to. Images will keep their aspect ratio, so
+  # resizing e.g. a 2048x1024 image to 1024x1024 will resolution in a 1024x512
+  # image.
+  #
+  # You must define at least one size for photos support to work.
   sizes:
     large:
       w: 1024
       h: 1024
-    small:
+    thumb:
       w: 400
       h: 400
