@@ -2,9 +2,9 @@ import {join as pathJoin} from 'path';
 import {spawn} from 'child_process';
 import chokidar from 'chokidar';
 
-import buildWebpack from '../builder/buildWebpack';
+import build from '../builder';
 
-import {log, enterLogSection, exitLogSection, createProcessLogger} from '../util/logger';
+import {createProcessLogger} from '../util/logger';
 
 const binPath = pathJoin(__dirname, '../../bin/peridot');
 
@@ -26,9 +26,7 @@ async function rebuild() {
   building = true;
   queuedPath = null;
 
-  log(`File "${path}" changed, rebuilding...`);
-
-  enterLogSection();
+  console.log(`File "${path}" changed...`);
 
   // spawn rebuild so it uses new components/
   // TODO: reject on non-zero code to display an error message warning of some sort
@@ -42,14 +40,12 @@ async function rebuild() {
     proc.on('exit', resolve);
   });
 
-  const buildWebpackPromise = buildWebpack();
+  const buildWebpackPromise = build({
+    skipPages: true,
+    skipCopy: true
+  });
 
   await* [buildPagesPromise, buildWebpackPromise];
-
-  exitLogSection();
-
-  log('...Done!');
-  log('');
 
   if (queuedPath) {
     rebuild();
