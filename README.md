@@ -32,7 +32,25 @@ Serve your site at `localhost:3000`. This will automatically rebuild your client
 
 *(this whole section is obviously a to-do at the moment. The [source for loudplaces.disco.zone](https://github.com/thomasboyt/loudplaces.disco.zone) may be a useful resource if you want to experiment with Peridot)*
 
-### _entries.yml
+### \_entries.yml
+
+Entries have the following default fields. Fields marked with an asterisk (\*) are in the shortened version of an entry used for the post list views.
+
+* \* `title`: The title of the entry
+* \* `date`: The date of the entry. Should be a string in the format `YYYY-MM-DD`.
+* \* `location`: The location of the entry.
+* `body`: The body of the entry. This is parsed and rendered as Markdown.
+* `media`: A list of media (see [Using Media](#using-media))
+
+Only the `title` and `date` fields are required.
+
+#### `hasContent`
+
+An additional field, `hasContent`, is automatically added to the serialized `post` received on the `<Post />` component. If a `body` or `media` field is not set, this field is set to `false`.
+
+#### Custom fields
+
+You an add additional custom fields, which will be passed as part of the `post` object received in the `<Post />` component. They will not be available as part of the "short-form" post objects passed to the `<List />` component (see [this issue](https://github.com/thomasboyt/peridot/issues/38)).
 
 ### Customizing Components
 
