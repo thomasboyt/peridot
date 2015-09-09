@@ -14,7 +14,7 @@ import {Module} from 'module';
 
 const prevNodeModulePaths = Module._nodeModulePaths;
 
-const appModules = path.join(__dirname, '../node_modules');
+const appModules = path.join(__dirname, '../../node_modules');
 
 Module._nodeModulePaths = function(from) {
   const paths = prevNodeModulePaths.call(this, from);

@@ -1,14 +1,22 @@
 import {readFileSync} from 'fs';
 import yaml from 'js-yaml';
+import {sync as mkdirpSync} from 'mkdirp';
 
 import loadEntries from './loadEntries';
-import {log} from '../util/logger';
 
 import renderEntries from './render/renderEntries';
 import renderList from './render/renderList';
 
+function ensureBuildFoldersExist() {
+  mkdirpSync('_cache/tweets');
+  mkdirpSync('_cache/photos');
 
-async function buildPagesInternal() {
+  mkdirpSync('_site/entries');
+}
+
+async function build() {
+  ensureBuildFoldersExist();
+
   const entriesYaml = readFileSync('_entries.yml', {encoding: 'utf8'});
 
   const entryData = yaml.safeLoad(entriesYaml);
@@ -19,41 +27,31 @@ async function buildPagesInternal() {
   await renderList(entries);
 }
 
-export default async function buildPagesWrapper() {
-  log('Starting pages build...');
-
-  const startTime = new Date();
+async function main() {
+  /* eslint no-process-exit: 0 */
 
   try {
-    await buildPagesInternal();
+    await build();
 
   } catch(err) {
-    log('Unhandled error building pages:');
-
-    // warning: lame duck-typing below
-
     if (err.stack) {
       // JS errors
-      log(err.stack);
+      console.error(err.stack);
 
     } else if (err.url) {
       // Failed fetch response
       // e.g. twitter fetch
-      log(`${err.url} - ${err.status} ${err.statusText}`);
+      console.error(`${err.url} - ${err.status} ${err.statusText}`);
       const body = await err.text();
-      log(body);
+      console.error(body);
 
     } else {
       // Other error
-      log(err);
+      console.error(err);
     }
 
-    return;
+    process.exit(1);
   }
-
-  const endTime = new Date();
-
-  const time = (endTime - startTime) / 1000;
-
-  log(`Finished pages build (${time} s)`);
 }
+
+main();

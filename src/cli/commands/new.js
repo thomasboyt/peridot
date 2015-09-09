@@ -1,12 +1,13 @@
 import path from 'path';
 import {readFileSync, writeFileSync} from 'fs';
-import exists from '../util/exists';
 import {sync as mkdirpSync} from 'mkdirp';
 
 import {Promise} from 'es6-promise';
 import recursive from 'recursive-readdir';
 
-const templateDir = path.join(__dirname, '../../template');
+import exists from '../../util/exists';
+
+const templateDir = path.join(__dirname, '../../../template');
 
 function getTemplateFiles() {
   return new Promise((resolve, reject) => {

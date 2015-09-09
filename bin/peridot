@@ -4,7 +4,4 @@ require('babel/register')({
   optional: ['es7.asyncFunctions']
 });
 
-require('../src/monkeyPatchModuleLoading');
-require('../src/injectGlobals');
-
 require('../src/cli');
