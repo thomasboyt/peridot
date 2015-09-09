@@ -11,4 +11,4 @@ npm install
 
 ## Developing
 
-See the [Peridot README](https://github.com/thomasboyt/peridot#peridot-).
+See the [Peridot README](https://github.com/thomasboyt/peridot#peridot).
