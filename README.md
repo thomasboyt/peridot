@@ -44,16 +44,55 @@ While you can use any form of media you want in your client-side application, Pe
 
 ### Photos
 
-Peridot can import photos from your local filesystem during its build process, resizing and caching them for future display. For example:
+Peridot can import photos from your local filesystem during its build process, resizing and caching them for future display. This requires you to have either [GraphicsMagick](http://www.graphicsmagick.org/) or [ImageMagick](http://www.imagemagick.org/script/index.php) installed. On OSX, you can install them with [Homebrew](http://brew.sh/).
 
-```
+For example, in `_entries.yml`, the following `media`:
+
+```yaml
 media:
-    - photo: speedy/IMG_1119.jpg
-      caption: Aye Nako in action
+  - photo: speedy/IMG_1119.jpg
+    caption: Aye Nako in action
 ```
 
 Will import a file from `project_directory/photos/speedy/IMG_1119.jpg`.
 
-*todo: how to display photo in blog*
+The photo will be resized to whatever sizes you have defined in your project's `_settings.yml` file. You can access the URL for each size on `media.data.sizes` in your app. For example, if you defined the following sizes in `_settings.yml`:
+
+```yaml
+photos:
+  sizes:
+    large:
+      w: 1024
+      h: 1024
+    thumb:
+      w: 250
+      h: 250
+```
+
+You could then render the thumbnail, with a link to the large image, like so:
+
+```js
+const Post = React.createClass({
+
+  // ...
+
+  renderMedia() {
+    const media = this.props.post.media;
+
+    return media.map((media) => {
+      if (media.type === 'photo') {
+        return (
+          <a href={media.data.sizes.large} key={media.data.sizes.large}>
+            <img src={media.data.sizes.thumb} />
+            <p>{media.data.caption}</p>
+          </a>
+        );
+      }
+    });
+  },
+
+  // ...
+});
+```
 
 ### Tweets
