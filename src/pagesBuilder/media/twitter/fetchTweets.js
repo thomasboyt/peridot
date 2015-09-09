@@ -3,8 +3,6 @@ import fetch from 'node-fetch';
 
 import getToken from './getToken';
 
-import {log} from '../../../util/logger';
-
 /*
  * Given a list of Tweet objects, fetches data for each tweet and calls
  * `tweet.didFetch(fetchedData)` to hydrate the object
@@ -36,7 +34,7 @@ export default async function fetchTweets(tweets) {
     }
 
   } catch(err) {
-    log('error fetching tweets');
+    console.error('Error fetching tweets');
     throw err;
   }
 }

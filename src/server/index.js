@@ -1,5 +1,4 @@
 import express from 'express';
-import {log} from '../util/logger';
 
 import build from '../builder';
 import watch from './watch';
