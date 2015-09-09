@@ -3,8 +3,9 @@ import fs from 'fs';
 import path from 'path';
 import getConverter from './getConverter';
 
-import exists from '../../../../util/exists';
 import getSettings from '../../../../settings';
+
+import {getPhotoHash, addPhotoHash} from './photoCache';
 
 function getCachePath(filename) {
   return `./_cache/photos/${filename}`;
@@ -29,10 +30,17 @@ export default async function getPhoto(imgPath) {
 
   const srcPath = path.resolve(path.join(process.cwd(), settings.photos.dir), imgPath);
 
-  // Get hash of photo
-  const sum = crypto.createHash('md5');
-  sum.update(fs.readFileSync(srcPath, {encoding: 'binary'}));
-  const hexSum = sum.digest('hex');
+  let hash = getPhotoHash(srcPath);
+  let cached = !!hash;
+
+  if (!cached) {
+    // Get hash of photo
+    const sum = crypto.createHash('md5');
+    sum.update(fs.readFileSync(srcPath, {encoding: 'binary'}));
+    hash = sum.digest('hex');
+
+    addPhotoHash(srcPath, hash);
+  }
 
   // Build dictionary of sizes to urls:
   // {
@@ -45,16 +53,17 @@ export default async function getPhoto(imgPath) {
   const sizes = {};
 
   for (let sizeName in settings.photos.sizes) {
-    const filename = `${hexSum}:${sizeName}${path.extname(imgPath)}`;
+    const {w, h} = settings.photos.sizes[sizeName];
+
+    const filename = `${hash}:${sizeName}${path.extname(imgPath)}`;
+    sizes[sizeName] = `/assets/photos/${filename}`;
+
     const cachePath = getCachePath(filename);
 
     // If a cached version doesn't exist, import it
-    if (!exists(cachePath)) {
-      const {w, h} = settings.photos.sizes[sizeName];
+    if (!cached) {
       await resizeAndSave(srcPath, cachePath, w, h);
     }
-
-    sizes[sizeName] = `/assets/photos/${filename}`;
   }
 
   // Return img data
