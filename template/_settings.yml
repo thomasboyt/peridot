@@ -4,7 +4,7 @@ photos:
   dir: 'photos/'
 
   # Define sizes to resize images to. Images will keep their aspect ratio, so
-  # resizing e.g. a 2048x1024 image to 1024x1024 will resolution in a 1024x512
+  # resizing e.g. a 2048x1024 image to 1024x1024 will result in a 1024x512
   # image.
   #
   # You must define at least one size for photos support to work.
