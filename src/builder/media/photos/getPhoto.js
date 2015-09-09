@@ -4,15 +4,16 @@ import path from 'path';
 import getConverter from './getConverter';
 
 import exists from '../../../util/exists';
+import getSettings from '../../../settings';
 
 function getCachePath(filename) {
   return `./_cache/photos/${filename}`;
 }
 
-function resizeAndSave(srcPath, destPath) {
+function resizeAndSave(srcPath, destPath, width, height) {
   return new Promise((resolve, reject) => {
     getConverter()(srcPath)
-      .resize(1024, 1024, '>')
+      .resize(width, height, '>')
       .write(destPath, (err) => {
         if (err) {
           reject(err);
@@ -23,31 +24,39 @@ function resizeAndSave(srcPath, destPath) {
   });
 }
 
-/*
- * Import a local photo, using the max size setting and resizing down as appropriate.
- */
-async function importPhoto(srcPath, destPath) {
-  await resizeAndSave(srcPath, destPath);
-}
-
 export default async function getPhoto(imgPath) {
-  const srcPath = path.resolve(path.join(process.cwd(), 'photos'), imgPath);
+  const settings = getSettings();
+
+  const srcPath = path.resolve(path.join(process.cwd(), settings.photos.dir), imgPath);
 
   // Get hash of photo
   const sum = crypto.createHash('md5');
   sum.update(fs.readFileSync(srcPath, {encoding: 'binary'}));
   const hexSum = sum.digest('hex');
 
-  const filename = `${hexSum}${path.extname(imgPath)}`;
+  // Build dictionary of sizes to urls:
+  // {
+  //   sizes: {
+  //     large: "/assets/photos/hash:large.jpg",
+  //     small: "/assets/photos/hash:small.jpg"
+  //   }
+  // }
 
-  const cachePath = getCachePath(filename);
+  const sizes = {};
 
-  if (!exists(cachePath)) {
-    await importPhoto(srcPath, cachePath);
+  for (let sizeName in settings.photos.sizes) {
+    const filename = `${hexSum}:${sizeName}${path.extname(imgPath)}`;
+    const cachePath = getCachePath(filename);
+
+    // If a cached version doesn't exist, import it
+    if (!exists(cachePath)) {
+      const {w, h} = settings.photos.sizes[sizeName];
+      await resizeAndSave(srcPath, cachePath, w, h);
+    }
+
+    sizes[sizeName] = `/assets/photos/${filename}`;
   }
 
   // Return img data
-  return {
-    url: `/assets/photos/${filename}`
-  };
+  return {sizes};
 }

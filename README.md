@@ -44,4 +44,16 @@ While you can use any form of media you want in your client-side application, Pe
 
 ### Photos
 
+Peridot can import photos from your local filesystem during its build process, resizing and caching them for future display. For example:
+
+```
+media:
+    - photo: speedy/IMG_1119.jpg
+      caption: Aye Nako in action
+```
+
+Will import a file from `project_directory/photos/speedy/IMG_1119.jpg`.
+
+*todo: how to display photo in blog*
+
 ### Tweets
