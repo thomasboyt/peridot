@@ -23,7 +23,7 @@ app.command('new <path>')
   .description('Create new blog using the default template at [path]')
   .option('-f, --force', 'Overwrite existing files at [path]')
   .action((...args) => {
-    const generate = require('./generator');
+    const generate = require('./commands/new');
     errorWrap(generate, ...args);
   });
 
@@ -35,7 +35,7 @@ app.command('build')
   .option('--skip-copy', 'don\'t copy static files to _site/')
   .option('--log-webpack', 'log Webpack stats to webpack.log.json')
   .action((...args) => {
-    const build = require('./builder');
+    const build = require('./commands/build');
     errorWrap(build, ...args);
   });
 
@@ -43,7 +43,7 @@ app.command('serve')
   .description('Build and serve files')
   .option('-p, --port <port>', 'port to serve on (defaults to 3000)', intOpt('port'), 3000)
   .action((...args) => {
-    const serve = require('./server');
+    const serve = require('./commands/serve');
     errorWrap(serve, ...args);
   });
 

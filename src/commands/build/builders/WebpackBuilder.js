@@ -1,9 +1,9 @@
 import {writeFileSync} from 'fs';
 import webpack from 'webpack';
-import generateWebpackConfig from './generateWebpackConfig';
 import {Promise} from 'es6-promise';
 
-import Builder from './Builder';
+import generateWebpackConfig from '../../../generateWebpackConfig';
+import AbstractBuilder from './AbstractBuilder';
 
 let compiler;
 
@@ -25,7 +25,7 @@ function runWebpack(optimize = false) {
   });
 }
 
-export default class WebpackBuilder extends Builder {
+export default class WebpackBuilder extends AbstractBuilder {
   constructor() {
     super();
 

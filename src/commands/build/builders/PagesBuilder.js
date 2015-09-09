@@ -1,9 +1,9 @@
 import {join as pathJoin} from 'path';
 import {spawn} from 'child_process';
 
-import Builder from './Builder';
+import AbstractBuilder from './AbstractBuilder';
 
-const binPath = pathJoin(__dirname, '../../bin/peridot-build-pages');
+const binPath = pathJoin(__dirname, '../../../../bin/peridot-build-pages');
 
 function spawnBuildPages() {
   return new Promise((resolve, reject) => {
@@ -21,7 +21,7 @@ function spawnBuildPages() {
   });
 }
 
-export default class PagesBuilder extends Builder {
+export default class PagesBuilder extends AbstractBuilder {
   constructor() {
     super();
 

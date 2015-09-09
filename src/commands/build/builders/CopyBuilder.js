@@ -1,6 +1,6 @@
 import cpr from 'cpr';
 
-import Builder from './Builder';
+import AbstractBuilder from './AbstractBuilder';
 
 function cprP(...args) {
   return new Promise((resolve, reject) => {
@@ -14,7 +14,7 @@ function cprP(...args) {
   });
 }
 
-export default class CopyBuilder extends Builder {
+export default class CopyBuilder extends AbstractBuilder {
   constructor() {
     super();
 

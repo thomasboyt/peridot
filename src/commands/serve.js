@@ -1,7 +1,7 @@
 import express from 'express';
 
-import build from '../builder';
-import watch from './watch';
+import build from './build';
+import watch from '../watch';
 
 export default async function serve(options) {
   await build({
@@ -18,7 +18,7 @@ export default async function serve(options) {
     const host = server.address().address;
     const port = server.address().port;
 
-    log(`Listening at http://${host}:${port}`);
+    console.log(`Listening at http://${host}:${port}`);
   });
 
   watch();

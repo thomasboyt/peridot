@@ -1,10 +1,10 @@
 import webpack from 'webpack';
 import merge from 'webpack-merge';
 import path from 'path';
-import requireFromProject from '../util/requireFromProject';
+import requireFromProject from './util/requireFromProject';
 
 export default function generateWebpackConfig(optimize) {
-  const root = path.join(__dirname, '../..');
+  const root = path.join(__dirname, '..');
 
   const customConfig = requireFromProject('./webpack.config.js')(optimize);
 

@@ -1,7 +1,7 @@
 import {join as pathJoin} from 'path';
 import chokidar from 'chokidar';
 
-import build from '../builder';
+import build from './commands/build';
 
 // hmmmm
 let queuedPath = null;
