@@ -2,7 +2,7 @@ import {writeFileSync} from 'fs';
 import webpack from 'webpack';
 import {Promise} from 'es6-promise';
 
-import generateWebpackConfig from '../../../generateWebpackConfig';
+import generateWebpackConfig from '../../generateWebpackConfig';
 import AbstractBuilder from './AbstractBuilder';
 
 let compiler;

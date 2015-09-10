@@ -3,7 +3,7 @@ import {spawn} from 'child_process';
 
 import AbstractBuilder from './AbstractBuilder';
 
-const binPath = pathJoin(__dirname, '../../../../../bin/peridot-build-pages');
+const binPath = pathJoin(__dirname, '../../../../bin/peridot-build-pages');
 
 function spawnBuildPages() {
   return new Promise((resolve, reject) => {
@@ -25,10 +25,11 @@ export default class PagesBuilder extends AbstractBuilder {
   constructor() {
     super();
 
+    this.depends = 'entries';
     this.description = 'building pages';
   }
 
-  async build(/*options*/) {
+  async build(options) {
     await spawnBuildPages();
   }
 }

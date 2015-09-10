@@ -7,4 +7,4 @@ require('babel/register')({
 require('../src/pagesBuilder/monkeyPatchModuleLoading');
 require('../src/pagesBuilder/injectGlobals');
 
-require('../src/pagesBuilder');
+require('../src/pagesBuilder')();

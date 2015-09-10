@@ -3,8 +3,8 @@ import fs from 'fs';
 import path from 'path';
 import getConverter from './getConverter';
 
-import exists from '../../../util/exists';
-import getSettings from '../../../settings';
+import exists from '../../../../util/exists';
+import getSettings from '../../../../settings';
 
 function getCachePath(filename) {
   return `./_cache/photos/${filename}`;

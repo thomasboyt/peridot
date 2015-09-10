@@ -1,7 +1,7 @@
 import express from 'express';
 
 import build from './build';
-import watch from '../watch';
+import watch from '../../core/watch';
 
 export default async function serve(options) {
   await build({

@@ -8,7 +8,7 @@ import recursive from 'recursive-readdir';
 import inquirer from 'inquirer';
 import {copySync} from 'fs-extra';
 
-import exists from '../../util/exists';
+import exists from '../util/exists';
 
 const templateDir = path.join(__dirname, '../../../template');
 

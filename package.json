@@ -20,6 +20,7 @@
     "chokidar": "^1.0.5",
     "commander": "^2.8.1",
     "cpr": "^0.4.1",
+    "elegant-spinner": "^1.0.0",
     "es6-promise": "^3.0.2",
     "express": "^4.13.3",
     "fs-extra": "^0.24.0",
