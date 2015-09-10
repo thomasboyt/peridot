@@ -3,9 +3,9 @@ import fs from 'fs';
 import path from 'path';
 import getConverter from './getConverter';
 
-import getSettings from '../../../../settings';
-
 import {getPhotoHash, addPhotoHash} from './photoCache';
+
+import getSettings from '../../../../settings';
 
 function getCachePath(filename) {
   return `./_cache/photos/${filename}`;

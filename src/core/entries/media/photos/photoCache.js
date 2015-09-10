@@ -1,7 +1,7 @@
 import {readFileSync, writeFileSync} from 'fs';
 import _ from 'lodash';
 
-import getSettings from '../../../settings';
+import getSettings from '../../../../settings';
 
 const cachePath = `_cache/photos.json`;
 
