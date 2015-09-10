@@ -24,9 +24,9 @@ Generate a new blog at `<path>`.
 
 Build your blog to `_site/`. Optionally minify your client-side app bundle by passing `--optimize`.
 
-### `peridot serve`
+### `peridot serve [--port=3000]`
 
-Serve your site at `localhost:3000`. This will automatically rebuild your client-side bundle and rendered pages when you change files in your project.
+Serve your site at `localhost:[port]`. This will automatically rebuild your client-side bundle and rendered pages when you change files in your project.
 
 ## Developing Your Site
 
