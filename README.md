@@ -44,9 +44,9 @@ Entries have the following default fields. Fields marked with an asterisk (\*) a
 
 Only the `title` and `date` fields are required.
 
-#### `hasContent`
+#### hasMedia & hasBody
 
-An additional field, `hasContent`, is automatically added to the serialized `post` received on the `<Post />` component. If a `body` or `media` field is not set, this field is set to `false`.
+Two additional fields, `hasMedia` and `hasBody`, are automatically added to the serialized `post` received by the `<List />` and `<Post />` components. If there is media or a post body present, the respective attribute will be `true`; otherwise it's set to `false`.
 
 #### Custom fields
 

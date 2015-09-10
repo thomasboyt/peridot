@@ -37,10 +37,6 @@ export default class Entry {
     return slug(`${this.date} ${this.title}`, {lower: true});
   }
 
-  hasContent() {
-    return !!(this.media || this.body);
-  }
-
   getMediaQueue() {
     return this.mediaQueueIdxs.map((mediaIdx) => this.media[mediaIdx]);
   }
@@ -65,7 +61,8 @@ export default class Entry {
       slug: this.getSlug(),
       body: this.renderBody(),
       media: this.media.map((media) => media.serialize()),
-      hasContent: this.hasContent(),
+      hasBody: !!this.body,
+      hasMedia: this.media.length > 0,
 
       ...this.customData
     };

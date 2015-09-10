@@ -10,7 +10,8 @@ export default async function renderList(entries) {
       location: entry.location,
       date: entry.date,
       slug: entry.slug,
-      hasContent: entry.hasContent
+      hasBody: !!entry.body,
+      hasMedia: entry.media.length > 0
     };
   });
 
