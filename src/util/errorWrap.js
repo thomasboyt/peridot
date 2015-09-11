@@ -9,10 +9,10 @@ export default async function errorWrap(cb, ...args) {
   } catch(err) {
     if (err.stack) {
       // JS errors
-      console.log(err.stack);
+      console.error(err.stack);
     } else {
       // Other error
-      console.log(err);
+      console.error(err);
     }
 
     process.exit(1);

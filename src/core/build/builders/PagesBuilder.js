@@ -13,7 +13,7 @@ function spawnBuildPages() {
 
     proc.on('exit', (code) => {
       if (code !== 0) {
-        const err = proc.stdout.read() || '';
+        const err = proc.stderr.read() || '';
         reject(err);
       } else {
         resolve();
