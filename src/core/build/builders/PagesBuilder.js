@@ -13,7 +13,8 @@ function spawnBuildPages() {
 
     proc.on('exit', (code) => {
       if (code !== 0) {
-        reject(proc.stderr.read());
+        const err = proc.stdout.read() || '';
+        reject(err);
       } else {
         resolve();
       }
@@ -29,7 +30,7 @@ export default class PagesBuilder extends AbstractBuilder {
     this.description = 'building pages';
   }
 
-  async build(options) {
+  async build(/*options*/) {
     await spawnBuildPages();
   }
 }
