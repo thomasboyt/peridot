@@ -48,7 +48,7 @@ export default async function(outPath, options) {
       basename = '.eslintrc';
     }
 
-    const dirOutPath = path.join(process.cwd(), outPath, dirname);
+    const dirOutPath = path.join(path.resolve(process.cwd(), outPath), dirname);
     const fileOutPath = path.join(dirOutPath, basename);
 
     mkdirpSync(dirOutPath);
