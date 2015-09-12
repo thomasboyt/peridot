@@ -1,6 +1,6 @@
 import {writeFileSync} from 'fs';
 import webpack from 'webpack';
-import {Promise} from 'es6-promise';
+import promiseWrap from '../../../util/promiseWrap';
 
 import generateWebpackConfig from '../../generateWebpackConfig';
 import AbstractBuilder from './AbstractBuilder';
@@ -14,15 +14,7 @@ function runWebpack(optimize = false) {
     compiler = webpack(config);
   }
 
-  return new Promise((resolve, reject) => {
-    compiler.run((err, stats) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(stats);
-      }
-    });
-  });
+  return promiseWrap(compiler.run.bind(compiler))();
 }
 
 export default class WebpackBuilder extends AbstractBuilder {

@@ -1,18 +1,9 @@
 import cpr from 'cpr';
+import promiseWrap from '../../../util/promiseWrap';
 
 import AbstractBuilder from './AbstractBuilder';
 
-function cprP(...args) {
-  return new Promise((resolve, reject) => {
-    cpr(...args, (err, files) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(files);
-      }
-    });
-  });
-}
+const cprP = promiseWrap(cpr);
 
 export default class CopyBuilder extends AbstractBuilder {
   constructor() {

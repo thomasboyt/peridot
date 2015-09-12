@@ -9,20 +9,11 @@ import inquirer from 'inquirer';
 import {copySync} from 'fs-extra';
 
 import exists from '../util/exists';
+import promiseWrap from '../util/promiseWrap';
 
 const templateDir = path.join(__dirname, '../../../template');
 
-function getTemplateFiles() {
-  return new Promise((resolve, reject) => {
-    recursive(templateDir, function(err, files) {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(files);
-      }
-    });
-  });
-}
+const recursiveP = promiseWrap(recursive);
 
 function showPrompt(...args) {
   return new Promise((resolve) => {
@@ -40,7 +31,7 @@ export default async function(outPath, options) {
   }
 
   // Read template files
-  const files = await getTemplateFiles();
+  const files = await recursiveP(templateDir);
 
   files.forEach((file) => {
     const content = readFileSync(file, {encoding: 'utf-8'});

@@ -18,7 +18,7 @@ export default class Builder {
     return new Promise((resolve, reject) => {
       if (this.done) {
         resolve();
-      } else if (this.didError ){
+      } else if (this.didError) {
         reject();
       }
 
