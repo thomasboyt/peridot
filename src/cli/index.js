@@ -11,6 +11,7 @@ app
 app.command('new <path>')
   .description('Create new blog using the default template at [path]')
   .option('-f, --force', 'Overwrite existing files at [path]')
+  .option('--npm-install', 'Run NPM install')
   .action((...args) => {
     const generate = require('./commands/new');
     errorWrap(generate, ...args);

@@ -62,12 +62,16 @@ export default async function(outPath, options) {
 
   console.log(`Created new Peridot project in ${fullPath}.`);
 
-  const {shouldNPMInstall} = await showPrompt([{
-    type: 'confirm',
-    name: 'shouldNPMInstall',
-    message: 'Run npm install?',
-    default: true
-  }]);
+  let shouldNPMInstall = options.npmInstall;
+
+  if (process.stdin.isTTY) {
+    shouldNPMInstall = await showPrompt([{
+      type: 'confirm',
+      name: 'shouldNPMInstall',
+      message: 'Run npm install?',
+      default: true
+    }]).shouldNPMInstall;
+  }
 
   if (shouldNPMInstall) {
     execSync('npm install', {
