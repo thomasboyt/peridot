@@ -8,8 +8,8 @@ import recursive from 'recursive-readdir';
 import inquirer from 'inquirer';
 import {copySync} from 'fs-extra';
 
-import exists from '../util/exists';
-import promiseWrap from '../util/promiseWrap';
+import exists from '../../util/exists';
+import promiseWrap from '../../util/promiseWrap';
 
 const templateDir = path.join(__dirname, '../../../template');
 
