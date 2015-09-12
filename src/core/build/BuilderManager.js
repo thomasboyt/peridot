@@ -50,7 +50,14 @@ export default class BuilderManager {
         builder.waiting = true;
         this.renderProgress();
 
-        await dependsOn.waitFor();
+        try {
+          await dependsOn.waitFor();
+        } catch(err) {
+          builder.didError = true;
+          builder.waiting = false;
+          this.renderProgress();
+          return;
+        }
 
         builder.waiting = false;
         this.renderProgress();
