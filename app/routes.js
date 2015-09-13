@@ -1,14 +1,14 @@
 import React from 'react';
-import {Route, DefaultRoute} from 'react-router';
+import {Route, IndexRoute} from 'react-router';
 
 import App from './views/App';
 import Entry from './views/Entry';
 import Index from './views/Index';
 
 const routes = (
-  <Route handler={App}>
-    <DefaultRoute name="index" handler={Index} />
-    <Route name="post" path="entries/:slug/" handler={Entry} />
+  <Route path="/" component={App}>
+    <IndexRoute component={Index} />
+    <Route path="/entries/:slug/" component={Entry} />
   </Route>
 );
 

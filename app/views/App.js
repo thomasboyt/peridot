@@ -1,18 +1,22 @@
 import React from 'react';
-import {RouteHandler} from 'react-router';
 import {Wrapper} from '../projectRequire';
 
 const App = React.createClass({
-  contextTypes: {
-    router: React.PropTypes.func.isRequired
-  },
+  // contextTypes: {
+  //   router: React.PropTypes.func.isRequired
+  // },
+  // mixins: [
+  //   State
+  // ],
 
   render() {
-    const name = this.context.router.getCurrentPath();
+    const key = this.props.location.key;
 
     return (
       <Wrapper>
-        <RouteHandler key={name} />
+        <span key={key}>
+          {this.props.children}
+        </span>
       </Wrapper>
     );
   }

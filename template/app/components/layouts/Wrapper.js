@@ -16,7 +16,7 @@ const Wrapper = React.createClass({
       <div className="container">
         <header>
           <h1>
-            <Link to="index">My Blog</Link>
+            <Link to="/">My Blog</Link>
           </h1>
         </header>
 

@@ -24,7 +24,7 @@ const List = React.createClass({
     const posts = this.props.posts.map((post) => {
       return (
         <li key={post.slug}>
-          <Link to="post" params={{slug: post.slug}}>{post.title}</Link>
+          <Link to={`entries/${post.slug}`}>{post.title}</Link>
         </li>
       );
     });
